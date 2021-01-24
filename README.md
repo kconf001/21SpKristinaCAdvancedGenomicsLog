@@ -29,7 +29,8 @@ exercises
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/exercises  
 ```
 
-*4) Execute pwd command & start a log of commands with a header for today's date in README.md github logfile in local workspace
+*4) Execute pwd command & start a log of commands 
+with a header for today's date in README.md github logfile in local workspace
 ```sh
 lyka@LAPTOP-GFGCMDB6 MINGW64 ~
 $ pwd        
@@ -56,7 +57,8 @@ $ nano
 *With nano command, README.md file is created with Exercise 02 Header & logfile.
 Logfile is filled at the end of each part of the exercises completed.
 
-*5) Copy the Exercise2.fasta.gz and Exercise2.fastq.tar.gz files into your course exercises directory from the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day02 directory
+*5) Copy the Exercise2.fasta.gz and Exercise2.fastq.tar.gz files into your course exercises directory 
+from the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day02 directory
 ```sh
 [kconf001@turing1 exercises]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day02/Exercise2.fast* ./
 [kconf001@turing1 exercises]$ ls
@@ -100,14 +102,14 @@ Exercise2.fasta  Exercise2.fasta.gz  Exercise2.fastq  Exercise2.fastq.tar.gz
 *7) Add commands to notebook file (see above)
 
 *8) Calculate how many sequences are in each file
-*Fasta file: Sequences start with '>'
-*Fastq file: Sequences start with '@'; Each fastq read includes 4 lines.
-*First line- Identifier
-*Second line- Sequence
-*Third line- Blank line (starts with +, sometimes have the same description as first line)
-*Fourth line- Quality for each base in Sequence (Second line)
-*grep -c = Used to find patterns (find a string in a file or string)
-*Can also divide total lines by 4 to find total sequence reads
+Fasta file: Sequences start with '>'
+Fastq file: Sequences start with '@'; Each fastq read includes 4 lines.
+First line- Identifier
+Second line- Sequence
+Third line- Blank line (starts with +, sometimes have the same description as first line)
+Fourth line- Quality for each base in Sequence (Second line)
+grep -c = Used to find patterns (find a string in a file or string)
+Can also divide total lines by 4 to find total sequence reads
 
 ```sh 
 [kconf001@turing1 exercises]$ head -1 Exercise2.fasta
@@ -124,7 +126,8 @@ Exercise2.fasta  Exercise2.fasta.gz  Exercise2.fastq  Exercise2.fastq.tar.gz
 61304.00000000000000000000  
 ```
 
-*9) Copy the python file from the /cm/shared/courses/dbarshis/21AdvGenomics/scripts directory into the class scripts directory
+*9) Copy the python file from the /cm/shared/courses/dbarshis/21AdvGenomics/scripts directory 
+into the class scripts directory
 ```sh
 [kconf001@turing1 exercises]$ cd ../
 [kconf001@turing1 data]$ cd ../
@@ -149,14 +152,15 @@ number of days that you need.
 [kconf001@coreV1-22-016 exercises]$
 ```
 
-*11) Run the python script on the Exercise2.fasta file by typing the path to the script followed by the Exercise2.fasta file name
+*11) Run the python script on the Exercise2.fasta file 
+by typing the path to the script followed by the Exercise2.fasta file name
 ```sh
 [kconf001@coreV1-22-016 exercises]$ ../ scripts/avg_cov_leg_fasta_advbioinf.py Exercise2.fasta
 ../: Permission denied. 
 ```
 
 *12) Add all parts to notebook README.md file including the results of the script
-*See above
+See above
 
 *13) Push notebook file to github page
 ```sh
