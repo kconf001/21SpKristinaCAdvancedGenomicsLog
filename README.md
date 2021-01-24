@@ -81,7 +81,6 @@ drwxrwxrwx 3 kconf001 users   27 Jan 22 13:25 ..
 -rwxrwxrwx 1 kconf001 users  17M Jan 22 14:26 Exercise2.fasta
 -rwxr-xr-x 1 kconf001 users 4.3M Jan 22 14:25 Exercise2.fasta.gz
 -rwxr-xr-x 1 kconf001 users 4.3M Jan 22 14:25 Exercise2.fastq.tar.gz
-
 [kconf001@turing1 exercises]$ tar -zxvf Exercise2.fastq.tar.gz
 Exercise2.fastq
 [kconf001@turing1 exercises]$ ls -alh
@@ -115,7 +114,6 @@ Exercise2.fasta  Exercise2.fasta.gz  Exercise2.fastq  Exercise2.fastq.tar.gz
 >scaffold10078|size20675
 [kconf001@turing1 exercises]$ grep -c '>' Exercise2.fasta
 138
-
 [kconf001@turing1 exercises]$ head -1 Exercise2.fastq
 @HS3:541:HAYTUADXX:1:1101:1297:1938 1:N:0:AGTTCC
 [kconf001@turing1 exercises]$ grep -c '@HS3' Exercise2.fastq
@@ -161,3 +159,24 @@ number of days that you need.
 *See above
 
 *13) Push notebook file to github page
+```sh
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)                                                                                                                  
+$ git add README.md
+warning: LF will be replaced by CRLF in README.md.
+The file will have its original line endings in your working directory
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ git commit -m 'updating readme'
+[main c32c255] updating readme
+1 file changed, 161 insertions(+), 4 deletions(-)
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ git push -u origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 2.11 KiB | 2.11 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/kconf001/21SpKristinaCAdvancedGenomicsLog.git
+d677019..c32c255  main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+```
