@@ -129,23 +129,24 @@ Can also divide total lines by 4 to find total sequence reads
 *9) Copy the python file from the /cm/shared/courses/dbarshis/21AdvGenomics/scripts directory 
 into the class scripts directory
 ```sh
+[kconf001@turing1 exercises]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py ../../scripts/
 [kconf001@turing1 exercises]$ cd ../
 [kconf001@turing1 data]$ cd ../
-[kconf001@turing1 KristinaC]$ ls
-data  groundrules.txt  KristinaC_Exercise1.txt  scripts
 [kconf001@turing1 KristinaC]$ cd scripts/
-[kconf001@turing1 scripts]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py ../scripts
 [kconf001@turing1 scripts]$ ls
 avg_cov_len_fasta_advbioinf.py
 ```
 
 *10) Start interactive compute session and re-navigate to exercises directory
 ```sh
+[kconf001@turing1 scripts]$ cd ../
+[kconf001@turing1 KristinaC]$ cd data/
+[kconf001@turing1 data]$ cd exercises/
 [kconf001@turing1 exercises]$ salloc
 salloc: Pending job allocation 9269144
 salloc: job 9269144 queued and waiting for resources
 salloc: job 9269144 has been allocated resources
-salloc: Granted job allocation 9269144
+salloc: Granted job allocation 9269517
 This session will be terminated in 7 days. If your application requires
 a longer excution time, please use command "salloc -t N-0" where N is the
 number of days that you need.
@@ -155,8 +156,21 @@ number of days that you need.
 *11) Run the python script on the Exercise2.fasta file 
 by typing the path to the script followed by the Exercise2.fasta file name
 ```sh
-[kconf001@coreV1-22-016 exercises]$ ../ scripts/avg_cov_leg_fasta_advbioinf.py Exercise2.fasta
-../: Permission denied. 
+[kconf001@coreV1-22-016 exercises]$ ../../scripts/avg_cov_len_fasta_advbioinf.py Exercise2.fasta
+The total number of sequences is 138
+The average sequence length is 126640
+The total number of bases is 17476447
+The minimum sequence length is 1122
+The maximum sequence length is 562680
+The N50 is 187037
+Median Length = 92612
+contigs < 150bp = 0
+contigs >= 500bp = 138
+contigs >= 1000bp = 138
+contigs >= 2000bp = 135
+[kconf001@coreV1-22-016 exercises]$ exit
+logout
+salloc: Relinquishing job allocation 9269517
 ```
 
 *12) Add all parts to notebook README.md file including the results of the script
