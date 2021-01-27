@@ -510,7 +510,7 @@ cols=line.rstrip().split('\t')
 os.popen('mv %s %s' %(cols[0], cols[1]))
 ```
 
-*6. Write sbatch script & submit it to rename all the .fastq files according to renaming table using renamer python script
+* 6. Write sbatch script & submit it to rename all the .fastq files according to renaming table using renamer python script
 ```sh
 [kconf001@turing1 fastq]$ nano KristinaCRenamer.sh
 [kconf001@turing1 fastq]$ ls
@@ -639,3 +639,61 @@ KristinaCRenamer.txt        RI_B_08_SNP.fastq  VA_B_01_14.fastq   VA_W_01_18.fas
 renamingtable_complete.txt  RI_W_01_14.fastq   VA_B_01_18.fastq   VA_W_01_22.fastq
 RI_B_01_14.fastq            RI_W_01_18.fastq   VA_B_01_22.fastq   VA_W_08_SNP.fastq
 ```
+* 13. Make sbatch script for Trimclipfilter, then script & run on fastq files
+
+```sh
+
+[kconf001@turing1 fastq]$ nano KristinaCTestTrimClip.sh
+[kconf001@turing1 fastq]$ cat KristinaCTestTrimClip.sh
+
+#!/bin/bash -l
+
+#SBATCH -o KristinaCTestTrimClip.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCTestTrimClip
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/scripts/Trimclipfilterstatsbatch_advbioinf.py adapterlist_advbioinf.txt *.fastq
+
+[kconf001@turing1 fastq]$ salloc
+salloc: Pending job allocation 9270528 
+salloc: job 9270528 queued and waiting for resources
+salloc: job 9270528 has been allocated resources
+salloc: Granted job allocation 9270542
+[kconf001@coreV2-25-072 fastq]$ sbatch KristinaCTestTrimClip.sh
+Submitted batch job 9270546
+[kconf001@coreV2-25-072 fastq]$ squeue -u kconf001
+JOBID   PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+9270542      main       sh kconf001  R      10:03      1 coreV2-25-072
+9270546      main Kristina kconf001  R       0:03      1 coreV2-25-005
+[kconf001@coreV2-25-072 fastq]$ ls -alh 
+drwxrwxrwx 2 kconf001 users  872 Jan 27 17:35 . 
+drwxrwxrwx 4 kconf001 users  212 Jan 27 14:59 .. 
+-rwxr-xr-x 1 kconf001 users 7.7K Jan 27 16:46 adapterlist_advbioinf.txt
+-rwxrwxrwx 1 kconf001 users  226 Jan 27 16:00 KristinaCRenamer.sh 
+-rwxrwxrwx 1 kconf001 users  18K Jan 27 16:32 KristinaCRenamer.txt
+-rwxrwxrwx 1 kconf001 users  310 Jan 27 17:26 KristinaCTestTrimClip.sh
+-rwxrwxrwx 1 kconf001 users  123 Jan 27 17:22 KristinaCTestTrimClip.txt
+-rwxr-xr-x 1 kconf001 users 4.6K Jan 27 15:00 renamingtable_complete.txt
+-rwxrwxrwx 1 kconf001 users 959M Jan 27 17:35 RI_B_01_14_clipped.fastq 
+-rw-r--r-- 1 kconf001 users 1.2G Jan 27 13:30 RI_B_01_14.fastq 
+-rw-r--r-- 1 kconf001 users 4.0G Jan 27 13:37 RI_B_01_18.fastq
+-rw-r--r-- 1 kconf001 users 4.0G Jan 27 13:32 RI_B_01_22.fastq 
+-rw-r--r-- 1 kconf001 users 3.6G Jan 27 13:40 RI_B_08_SNP.fastq
+-rw-r--r-- 1 kconf001 users 981M Jan 27 13:30 RI_W_01_14.fastq
+-rw-r--r-- 1 kconf001 users 4.0G Jan 27 13:37 RI_W_01_18.fastq
+-rw-r--r-- 1 kconf001 users 3.6G Jan 27 13:31 RI_W_01_22.fastq
+-rw-r--r-- 1 kconf001 users 6.7G Jan 27 13:40 RI_W_08_SNP.fastq
+-rwxrwxrwx 1 kconf001 users   45 Jan 27 17:27 trimclipstats.txt 
+-rw-r--r-- 1 kconf001 users 3.4G Jan 27 13:30 VA_B_01_14.fastq 
+-rw-r--r-- 1 kconf001 users 3.6G Jan 27 13:35 VA_B_01_18.fastq
+-rw-r--r-- 1 kconf001 users 4.7G Jan 27 13:30 VA_B_01_22.fastq
+-rw-r--r-- 1 kconf001 users 4.4G Jan 27 13:39 VA_B_09_SNP.fastq
+-rw-r--r-- 1 kconf001 users 2.6G Jan 27 13:29 VA_W_01_14.fastq 
+-rw-r--r-- 1 kconf001 users 4.6G Jan 27 13:34 VA_W_01_18.fastq
+-rw-r--r-- 1 kconf001 users  13M Jan 27 13:30 VA_W_01_22.fastq
+-rw-r--r-- 1 kconf001 users 4.4G Jan 27 13:38 VA_W_08_SNP.fastq 
+```
+* 14. Waiting for job to finish
+
+* 15. Updated Github & README.md
