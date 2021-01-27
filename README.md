@@ -232,7 +232,7 @@ kconf001@turing.hpc.odu.edu's password:
 KristinaCCopylane01.sh                                                                           100%  341     8.7KB/s   00:00
 
 Then input sbatch script
-
+```
 
 *3) Submit slurm script (sbatch KristinaCCopyl.sh) and verify that it's working (squeue -u kconf001 and/or ls -alh)
 
