@@ -1,7 +1,7 @@
 ## 01/22/2021
 #Exercises Day 02
 
-* 1) Log into the Cluster
+* 1. Log into the Cluster
 ```sh
 lyka@LAPTOP-GFGCMDB6 MINGW64 ~
 $ ssh kconf001@turing.hpc.odu.edu
@@ -9,7 +9,7 @@ kconf001@turing.hpc.odu.edu's password:
 Last login: Fri Jan 22 10:12:23 2021 from ip70-160-48-140.hr.hr.cox.net
 ```
 
-* 2) Make directory in course workspace called data
+* 2. Make directory in course workspace called data
 ```sh
 [kconf001@turing1 ~]$ cd /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC
 [kconf001@turing1 KristinaC]$ ls
@@ -19,7 +19,7 @@ groundrules.txt  KristinaC_Exercise1.txt  scripts
 data  groundrules.txt  KristinaC_Exercise1.txt  scripts
 ```
  
-* 3) Make directory called exercises in data directory
+* 3. Make directory called exercises in data directory
 ```sh
 [kconf001@turing1 KristinaC]$ cd data/
 [kconf001@turing1 data]$ mkdir exercises
@@ -29,7 +29,7 @@ exercises
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/exercises  
 ```
 
-* 4) Execute pwd command & start a log of commands 
+* 4. Execute pwd command & start a log of commands 
 * with a header for today's date in README.md github logfile in local workspace
 ```sh
 lyka@LAPTOP-GFGCMDB6 MINGW64 ~
@@ -57,7 +57,7 @@ $ nano
 * With nano command, README.md file is created with Exercise 02 Header & logfile.
 * Logfile is filled at the end of each part of the exercises completed.
 
-* 5) Copy the Exercise2.fasta.gz and Exercise2.fastq.tar.gz files into your course exercises directory 
+* 5. Copy the Exercise2.fasta.gz and Exercise2.fastq.tar.gz files into your course exercises directory 
 * from the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day02 directory
 ```sh
 [kconf001@turing1 exercises]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day02/Exercise2.fast* ./
@@ -71,7 +71,7 @@ drwxrwxrwx 3 kconf001 users   27 Jan 22 13:25 ..
 -rwxr-xr-x 1 kconf001 users 4.3M Jan 22 14:25 Exercise2.fastq.tar.gz 
 ```
 
-* 6) Unzip & untar the files
+* 6. Unzip & untar the files
 ```sh
 [kconf001@turing1 exercises]$ gunzip -c Exercise2.fasta.gz > Exercise2.fasta
 [kconf001@turing1 exercises]$ ls
@@ -99,9 +99,9 @@ drwxrwxrwx 3 kconf001 users   27 Jan 22 13:25 ..
 Exercise2.fasta  Exercise2.fasta.gz  Exercise2.fastq  Exercise2.fastq.tar.gz
 ```
 
-* 7) Add commands to notebook file (see above)
+* 7. Add commands to notebook file (see above)
 
-* 8) Calculate how many sequences are in each file
+* 8. Calculate how many sequences are in each file
 * Fasta file: Sequences start with '>'
 * Fastq file: Sequences start with '@'; Each fastq read includes 4 lines.
 * First line- Identifier
@@ -126,7 +126,7 @@ Exercise2.fasta  Exercise2.fasta.gz  Exercise2.fastq  Exercise2.fastq.tar.gz
 61304.00000000000000000000  
 ```
 
-* 9) Copy the python file from the /cm/shared/courses/dbarshis/21AdvGenomics/scripts directory 
+* 9. Copy the python file from the /cm/shared/courses/dbarshis/21AdvGenomics/scripts directory 
 * into the class scripts directory
 ```sh
 [kconf001@turing1 exercises]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py ../../scripts/
@@ -137,7 +137,7 @@ Exercise2.fasta  Exercise2.fasta.gz  Exercise2.fastq  Exercise2.fastq.tar.gz
 avg_cov_len_fasta_advbioinf.py
 ```
 
-* 10) Start interactive compute session and re-navigate to exercises directory
+* 10. Start interactive compute session and re-navigate to exercises directory
 ```sh
 [kconf001@turing1 scripts]$ cd ../
 [kconf001@turing1 KristinaC]$ cd data/
@@ -153,7 +153,7 @@ number of days that you need.
 [kconf001@coreV1-22-016 exercises]$
 ```
 
-* 11) Run the python script on the Exercise2.fasta file 
+* 11. Run the python script on the Exercise2.fasta file 
 * by typing the path to the script followed by the Exercise2.fasta file name
 ```sh
 [kconf001@coreV1-22-016 exercises]$ ../../scripts/avg_cov_len_fasta_advbioinf.py Exercise2.fasta
@@ -173,10 +173,10 @@ logout
 salloc: Relinquishing job allocation 9269517
 ```
 
-* 12) Add all parts to notebook README.md file including the results of the script
+* 12. Add all parts to notebook README.md file including the results of the script
 * See above
 
-* 13) Push notebook file to github page
+* 13. Push notebook file to github page
 ```sh
 lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
 $ git add README.md
@@ -200,7 +200,7 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
 ## 01/27/2021                                                                                                                      
 # Homework Day 02 (continuation of Exercise 02) 
-* 1)Make sure logged into turing node & in personal data directory. 
+* 1. Make sure logged into turing node & in personal data directory. 
 * Also input salloc command (see previous day for details).
 
 * Write an sbatch script to cp the files 
@@ -218,7 +218,7 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/HADB01*.fastq.gz /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/
 ```
 
-* 2) Add sbatch script to data directory (see above)
+* 2. Add sbatch script to data directory (see above)
 ```sh
 nano method (in turing cluster)
 [kconf001@coreV2-25-072 data] nano KristinaCCopy1.sh 
@@ -235,7 +235,7 @@ KristinaCCopylane01.sh                                                          
 Input sbatch script into .sh file
 ```
 
-* 3) Submit slurm script (sbatch KristinaCCopyl.sh) and verify that it's working (squeue -u kconf001 and/or ls -alh)
+* 3. Submit slurm script (sbatch KristinaCCopyl.sh) and verify that it's working (squeue -u kconf001 and/or ls -alh)
 
 ```sh
 [kconf001@coreV2-25-072 data] $ sbatch KristinaCCopy1.sh
@@ -245,9 +245,9 @@ JOBID   PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 9270470      main Kristina kconf001  R      17:25      1 coreV2-25-072  
 9270444      main       sh kconf001  R      01:25      1 coreV2-25-072
 ```
-* 4) Document in README.md / github notebook (see #13 in previous day)
+* 4. Document in README.md / github notebook (see #13 in previous day)
 
-* 5) Write sbatch script to gunzip all the fastaq.gz files once copying is finished.
+* 5. Write sbatch script to gunzip all the fastaq.gz files once copying is finished.
 ```sh
 Nano method
 #!/bin/bash -l
@@ -293,12 +293,12 @@ drwxrwxrwx 2 kconf001 users   142 Jan 25 09:57 exercises
 -rwxrwxrwx 1 kconf001 users   341 Jan 27 13:20 KristinaCLane01.sh
 ```
 
-* 6) Push updated README.md log to github page (see #13 in previous day).
+* 6. Push updated README.md log to github page (see #13 in previous day).
 
 ## 01/27/2021
 # Day 03 Homework
 
-* 1) cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03 directory & files to personal sandbox
+* 1. cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03 directory & files to personal sandbox
 ```sh
 [kconf001@coreV2-25-072 data]$ cd ../
 [kconf001@coreV2-25-072 KristinaC]$  cp -r /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/ ./ ls
@@ -306,7 +306,7 @@ drwxrwxrwx 2 kconf001 users   142 Jan 25 09:57 exercises
 data  day03  groundrules.txt  KristinaC_Exercise1.txt  scripts
 ```
 
-* 2) Make a new fastq directory (mkdir fastq) in directory and move (mv) all the .fastq files into the fastq directory
+* 2. Make a new fastq directory (mkdir fastq) in directory and move (mv) all the .fastq files into the fastq directory
 Make sure all files have finished gunzipping (ls -alh)
 ```sh
 [kconf001@coreV2-25-072 KristinaC]$ cd data
@@ -344,7 +344,7 @@ drwxrwxrwx 2 kconf001 users    0 Jan 27 14:50 fastq
 exercises  fastq  KristinaCCopylane01.txt  KristinaCGunZiplane01.sh  KristinaCGunZiplane01.txt  KristinaCLane01.sh
 ```
 
-* 3) cp the renamingtable_complete.txt from the day03 directory into your fastq directory 
+* 3. cp the renamingtable_complete.txt from the day03 directory into your fastq directory 
 * and the /cm/shared/courses/dbarshis/21AdvGenomics/scripts/renamer_advbioinf.py script into your sandbox scripts folder 
 * and less the new script and check out the usage statement.
 
