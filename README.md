@@ -178,7 +178,7 @@ See above
 
 *13) Push notebook file to github page
 ```sh
-lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)                                                                                                                  
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
 $ git add README.md
 warning: LF will be replaced by CRLF in README.md.
 The file will have its original line endings in your working directory
@@ -227,11 +227,12 @@ nano method (in turing cluster)
 ```sh
 scp method (in local directory files)
 lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis 
+$ nano KristinaCCopy1.sh
 $ scp KristinaCCopylane01.sh kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/
 kconf001@turing.hpc.odu.edu's password:
 KristinaCCopylane01.sh                                                                           100%  341     8.7KB/s   00:00
 
-Then input sbatch script
+Input sbatch script into .sh file
 ```
 
 *3) Submit slurm script (sbatch KristinaCCopyl.sh) and verify that it's working (squeue -u kconf001 and/or ls -alh)
@@ -262,6 +263,34 @@ Verify that it is working
 [kconf001@coreV2-25-072 data] $ squeue -u kconf001
 JOBID   PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 9270470      main Kristina kconf001  R      17:25      1 coreV2-25-072                                                                                                                               
-9270462      main       sh kconf001  R      25:25      1 coreV2-25-072                                                   
+9270462      main       sh kconf001  R      25:25      1 coreV2-25-072
+
+[kconf001@coreV2-25-072 data]$ ls -alh
+total 58G 
+drwxrwxrwx 3 kconf001 users  1017 Jan 27 14:37 . 
+drwxrwxrwx 4 kconf001 users   121 Jan 22 11:31 .. 
+drwxrwxrwx 2 kconf001 users   142 Jan 25 09:57 exercises
+-rw-r--r-- 1 kconf001 users  2.6G Jan 27 13:29 HADB01-A_S17_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  3.4G Jan 27 13:30 HADB01-B_S18_L002_R1_001.fastq  
+-rw-r--r-- 1 kconf001 users  981M Jan 27 13:30 HADB01-C_S19_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  1.2G Jan 27 13:30 HADB01-D_S20_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users   13M Jan 27 13:30 HADB01-E_S21_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  4.7G Jan 27 13:30 HADB01-F_S22_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  3.6G Jan 27 13:31 HADB01-G_S23_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  4.0G Jan 27 13:32 HADB01-H_S24_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  4.6G Jan 27 13:34 HADB01-I_S25_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  3.6G Jan 27 13:35 HADB01-J_S26_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  4.0G Jan 27 13:37 HADB01-K_S27_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  4.0G Jan 27 13:37 HADB01-L_S28_L002_R1_001.fastq
+-rw------- 1 kconf001 users  1.2G Jan 27 14:37 HADB01-M_S29_L002_R1_001.fastq
+-rw-r--r-- 1 kconf001 users  657M Jan 27 13:38 HADB01-M_S29_L002_R1_001.fastq.gz 
+-rw-r--r-- 1 kconf001 users  671M Jan 27 13:39 HADB01-N_S30_L002_R1_001.fastq.gz
+-rw-r--r-- 1 kconf001 users 1000M Jan 27 13:40 HADB01-O_S31_L002_R1_001.fastq.gz
+-rw-r--r-- 1 kconf001 users  538M Jan 27 13:40 HADB01-P_S32_L002_R1_001.fastq.gz
+-rwxrwxrwx 1 kconf001 users     0 Jan 27 13:29 KristinaCCopylane01.txt
+-rwxrwxrwx 1 kconf001 users   189 Jan 27 13:49 KristinaCGunZiplane01.sh
+-rwxrwxrwx 1 kconf001 users     0 Jan 27 13:52 KristinaCGunZiplane01.txt
+-rwxrwxrwx 1 kconf001 users   341 Jan 27 13:20 KristinaCLane01.sh                                                          
 ```
+
 *6) Push updated README.md log to github page (see #13 in previous day).
