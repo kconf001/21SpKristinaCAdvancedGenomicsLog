@@ -198,3 +198,70 @@ To https://github.com/kconf001/21SpKristinaCAdvancedGenomicsLog.git
 d677019..c32c255  main -> main
 Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
+## 01/28/2021                                                                                                                      
+#Exercises/Homework Day 03 
+*1)Make sure logged into turing node & in personal data directory. 
+Also input salloc command (see previous day for details).
+
+Write an sbatch script to cp the files 
+/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/ 
+into your own data directory
+Can use nano or scp
+
+```sh
+#!/bin/bash -l
+#SBATCH -o KristinaCCopylane01.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCCopylane01
+cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/HADB01*.fastq.gz /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/
+```
+
+*2) Add sbatch script to data directory (see above)
+```sh
+nano method (in turing cluster)
+[kconf001@coreV2-25-072 data] nano KristinaCCopy1.sh 
+```
+
+```sh
+scp method (in local directory files)
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis 
+$ scp KristinaCCopylane01.sh kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/
+kconf001@turing.hpc.odu.edu's password:
+KristinaCCopylane01.sh                                                                           100%  341     8.7KB/s   00:00
+
+Then input sbatch script
+
+
+*3) Submit slurm script (sbatch KristinaCCopyl.sh) and verify that it's working (squeue -u kconf001 and/or ls -alh)
+
+```sh
+[kconf001@coreV2-25-072 data] $ sbatch KristinaCCopy1.sh
+Submitted batch job 9270444
+[kconf001@coreV2-25-072 data] $ squeue -u kconf001
+JOBID   PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)  
+9270470      main Kristina kconf001  R      17:25      1 coreV2-25-072  
+9270444      main       sh kconf001  R      01:25      1 coreV2-25-072
+```
+*4) Document in README.md / github notebook (see #13 in previous day)
+
+*5) Write sbatch script to gunzip all the fastaq.gz files once copying is finished.
+```sh
+Nano method
+#!/bin/bash -l
+#SBATCH -o KristinaCCopylane01.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCGunZiplane01
+gunzip ./*fastq.gz
+```
+Verify that it is working
+```sh
+[kconf001@coreV2-25-072 data] $ squeue -u kconf001
+JOBID   PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+9270470      main Kristina kconf001  R      17:25      1 coreV2-25-072                                                                                                                               
+9270462      main       sh kconf001  R      25:25      1 coreV2-25-072                                                   
+```
+*6) Push updated README.md log to github page (see #13 in previous day).
