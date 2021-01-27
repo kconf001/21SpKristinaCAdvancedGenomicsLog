@@ -290,7 +290,7 @@ drwxrwxrwx 2 kconf001 users   142 Jan 25 09:57 exercises
 -rwxrwxrwx 1 kconf001 users     0 Jan 27 13:29 KristinaCCopylane01.txt
 -rwxrwxrwx 1 kconf001 users   189 Jan 27 13:49 KristinaCGunZiplane01.sh
 -rwxrwxrwx 1 kconf001 users     0 Jan 27 13:52 KristinaCGunZiplane01.txt
--rwxrwxrwx 1 kconf001 users   341 Jan 27 13:20 KristinaCLane01.sh                                                          
+-rwxrwxrwx 1 kconf001 users   341 Jan 27 13:20 KristinaCLane01.sh
 ```
 
 *6) Push updated README.md log to github page (see #13 in previous day).
