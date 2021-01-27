@@ -242,7 +242,7 @@ Submitted batch job 9270444
 [kconf001@coreV2-25-072 data] $ squeue -u kconf001
 JOBID   PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)  
 9270470      main Kristina kconf001  R      17:25      1 coreV2-25-072  
-9270444      main       sh kconf001  R      01:25      1 coreV2-25-072
+920444      main       sh kconf001  R      01:25      1 coreV2-25-072
 ```
 * 4. Document in README.md / github notebook (see #13 in previous day)
 
@@ -261,7 +261,7 @@ gunzip ./*fastq.gz
 ```sh
 [kconf001@coreV2-25-072 data] $ squeue -u kconf001
 JOBID   PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-9270470      main Kristina kconf001  R      17:25      1 coreV2-25-072                                                                                                                               
+9270470      main Kristina kconf001  R      17:25      1 coreV2-25-072 
 9270462      main       sh kconf001  R      25:25      1 coreV2-25-072
 
 [kconf001@coreV2-25-072 data]$ ls -alh
@@ -383,4 +383,237 @@ fin=open(sys.argv[1],'r')
 linecount=0
 for line in fin:
 linecount+=1
+```
+
+* 4. Run renamer_advbioinf.py script in fastq folter using renamingtable_complete.txt as practice & verify output to screen by hand.
+```sh
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~                                                                                                             
+$ ssh kconf001@turing.hpc.odu.edu  
+kconf001@turing.hpc.odu.edu's password:                                                                         
+Last login: Wed Jan 27 15:37:12 2021 from ip70-160-48-140.hr.hr.cox.net
+[kconf001@turing1 ~]$ cd /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq/
+[kconf001@turing1 fastq]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq
+[kconf001@turing1 fastq]$ ../../scripts/renamer_advbioinf.py renamingtable_complete.txt
+mv HADB01-A_S17_L002_R1_001.fastq VA_W_01_14.fastq
+mv HADB01-B_S18_L002_R1_001.fastq VA_B_01_14.fastq
+mv HADB01-C_S19_L002_R1_001.fastq RI_W_01_14.fastq
+mv HADB01-D_S20_L002_R1_001.fastq RI_B_01_14.fastq
+mv HADB01-E_S21_L002_R1_001.fastq VA_W_01_22.fastq
+mv HADB01-F_S22_L002_R1_001.fastq VA_B_01_22.fastq
+mv HADB01-G_S23_L002_R1_001.fastq RI_W_01_22.fastq
+mv HADB01-H_S24_L002_R1_001.fastq RI_B_01_22.fastq
+mv HADB01-I_S25_L002_R1_001.fastq VA_W_01_18.fastq
+mv HADB01-J_S26_L002_R1_001.fastq VA_B_01_18.fastq
+mv HADB01-K_S27_L002_R1_001.fastq RI_W_01_18.fastq
+mv HADB01-L_S28_L002_R1_001.fastq RI_B_01_18.fastq
+mv HADB01-M_S29_L002_R1_001.fastq VA_W_08_SNP.fastq
+mv HADB01-N_S30_L002_R1_001.fastq VA_B_09_SNP.fastq
+mv HADB01-O_S31_L002_R1_001.fastq RI_W_08_SNP.fastq
+mv HADB01-P_S32_L002_R1_001.fastq RI_B_08_SNP.fastq
+mv HADB02-A_S33_L003_R1_001.fastq VA_W_02_14.fastq
+mv HADB02-B_S34_L003_R1_001.fastq VA_B_02_14.fastq
+mv HADB02-C_S35_L003_R1_001.fastq RI_W_02_14.fastq
+mv HADB02-D_S36_L003_R1_001.fastq RI_B_02_14.fastq
+mv HADB02-E_S37_L003_R1_001.fastq VA_W_02_22.fastq
+mv HADB02-F_S38_L003_R1_001.fastq VA_B_02_22.fastq
+mv HADB02-G_S39_L003_R1_001.fastq RI_W_02_22.fastq
+mv HADB02-H_S40_L003_R1_001.fastq RI_B_02_22.fastq
+mv HADB02-I_S41_L003_R1_001.fastq VA_W_02_18.fastq
+mv HADB02-J_S42_L003_R1_001.fastq VA_B_02_18.fastq
+mv HADB02-K_S43_L003_R1_001.fastq RI_W_02_18.fastq
+mv HADB02-L_S44_L003_R1_001.fastq RI_B_02_18.fastq
+mv HADB02-M_S45_L003_R1_001.fastq VA_W_09_SNP.fastq
+mv HADB02-N_S46_L003_R1_001.fastq VA_B_08_SNP.fastq
+mv HADB02-O_S47_L003_R1_001.fastq RI_W_09_SNP.fastq
+mv HADB02-P_S48_L003_R1_001.fastq RI_B_09_SNP.fastq
+mv HADB03-A_S49_L004_R1_001.fastq VA_W_03_14.fastq
+mv HADB03-B_S50_L004_R1_001.fastq VA_B_03_14.fastq
+mv HADB03-C_S51_L004_R1_001.fastq RI_W_03_14.fastq
+mv HADB03-D_S52_L004_R1_001.fastq RI_B_03_14.fastq
+mv HADB03-E_S53_L004_R1_001.fastq VA_W_03_22.fastq
+mv HADB03-F_S54_L004_R1_001.fastq VA_B_03_22.fastq
+mv HADB03-G_S55_L004_R1_001.fastq RI_W_03_22.fastq
+mv HADB03-H_S56_L004_R1_001.fastq RI_B_03_22.fastq
+mv HADB03-I_S57_L004_R1_001.fastq VA_W_03_18.fastq
+mv HADB03-J_S58_L004_R1_001.fastq VA_B_03_18.fastq
+mv HADB03-K_S59_L004_R1_001.fastq RI_W_03_18.fastq
+mv HADB03-L_S60_L004_R1_001.fastq RI_B_03_18.fastq
+mv HADB03-M_S61_L004_R1_001.fastq VA_W_10_SNP.fastq
+mv HADB03-N_S62_L004_R1_001.fastq VA_B_10_SNP.fastq
+mv HADB03-O_S63_L004_R1_001.fastq RI_W_10_SNP.fastq
+mv HADB03-P_S64_L004_R1_001.fastq RI_B_10_SNP.fastq
+mv HADB04-A_S65_L005_R1_001.fastq VA_W_04_14.fastq
+mv HADB04-B_S66_L005_R1_001.fastq VA_B_04_14.fastq
+mv HADB04-C_S67_L005_R1_001.fastq RI_W_04_14.fastq
+mv HADB04-D_S68_L005_R1_001.fastq RI_B_04_14.fastq
+mv HADB04-E_S69_L005_R1_001.fastq VA_W_04_22.fastq
+mv HADB04-F_S70_L005_R1_001.fastq VA_B_04_22.fastq
+mv HADB04-G_S71_L005_R1_001.fastq RI_W_04_22.fastq
+mv HADB04-H_S72_L005_R1_001.fastq RI_B_04_22.fastq
+mv HADB04-I_S73_L005_R1_001.fastq VA_W_04_18.fastq
+mv HADB04-J_S74_L005_R1_001.fastq VA_B_04_18.fastq
+mv HADB04-K_S75_L005_R1_001.fastq RI_W_04_18.fastq
+mv HADB04-L_S76_L005_R1_001.fastq RI_B_04_18.fastq
+mv HADB04-M_S77_L005_R1_001.fastq VA_W_05_14.fastq
+mv HADB04-N_S78_L005_R1_001.fastq VA_B_05_14.fastq
+mv HADB04-O_S79_L005_R1_001.fastq RI_W_05_14.fastq
+mv HADB04-P_S80_L005_R1_001.fastq RI_B_05_14.fastq
+mv HADB05-A_S81_L006_R1_001.fastq VA_W_05_22.fastq
+mv HADB05-B_S82_L006_R1_001.fastq VA_B_05_22.fastq
+mv HADB05-C_S83_L006_R1_001.fastq RI_W_05_22.fastq
+mv HADB05-D_S84_L006_R1_001.fastq RI_B_05_22.fastq
+mv HADB05-E_S85_L006_R1_001.fastq VA_W_05_18.fastq
+mv HADB05-F_S86_L006_R1_001.fastq VA_B_05_18.fastq
+mv HADB05-G_S87_L006_R1_001.fastq RI_W_05_18.fastq
+mv HADB05-H_S88_L006_R1_001.fastq RI_B_05_18.fastq
+mv HADB05-I_S89_L006_R1_001.fastq VA_W_06_14.fastq
+mv HADB05-J_S90_L006_R1_001.fastq VA_B_06_14.fastq
+mv HADB05-K_S91_L006_R1_001.fastq RI_W_06_14.fastq
+mv HADB05-L_S92_L006_R1_001.fastq RI_B_06_14.fastq
+mv HADB05-M_S93_L006_R1_001.fastq VA_W_06_22.fastq
+mv HADB05-N_S94_L006_R1_001.fastq VA_B_06_22.fastq
+mv HADB05-O_S95_L006_R1_001.fastq RI_W_06_22.fastq
+mv HADB05-P_S96_L006_R1_001.fastq RI_B_06_22.fastq
+mv HADB06-A_S97_L007_R1_001.fastq VA_W_06_18.fastq
+mv HADB06-B_S98_L007_R1_001.fastq VA_B_06_18.fastq
+mv HADB06-C_S99_L007_R1_001.fastq RI_W_06_18.fastq
+mv HADB06-D_S100_L007_R1_001.fastq RI_B_06_18.fastq
+mv HADB06-E_S101_L007_R1_001.fastq VA_W_07_14.fastq
+mv HADB06-F_S102_L007_R1_001.fastq VA_B_07_14.fastq
+mv HADB06-G_S103_L007_R1_001.fastq RI_W_07_14.fastq
+mv HADB06-H_S104_L007_R1_001.fastq RI_B_07_14.fastq
+mv HADB06-I_S105_L007_R1_001.fastq VA_W_07_22.fastq
+mv HADB06-J_S106_L007_R1_001.fastq VA_B_07_22.fastq
+mv HADB06-K_S107_L007_R1_001.fastq RI_W_07_22.fastq
+mv HADB06-L_S108_L007_R1_001.fastq RI_B_07_22.fastq
+mv HADB06-M_S109_L007_R1_001.fastq VA_W_07_18.fastq
+mv HADB06-N_S110_L007_R1_001.fastq VA_B_07_18.fastq
+mv HADB06-O_S111_L007_R1_001.fastq RI_W_07_18.fastq
+mv HADB06-P_S112_L007_R1_001.fastq RI_B_07_18.fastq
+```
+
+* 5. Uncomment (remove the #) in renaming python script thaht starts with os.open and comment out the print line
+```sh
+[kconf001@turing1 fastq]$ pwd 
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq
+[kconf001@turing1 fastq]$ nano ../../scripts/renamer_advbioinf.py
+#!/usr/bin/env python
+####usage renamer.py renamingtable
+#### this script take the entries in the first column of table and renames (mv's) them to files with the names in the second column
+import sys
+import os
+linecount+=1
+if linecount>=2:
+cols=line.rstrip().split('\t')
+#print 'mv %s %s' %(cols[0], cols[1])
+os.popen('mv %s %s' %(cols[0], cols[1]))
+```
+
+*6. Write sbatch script & submit it to rename all the .fastq files according to renaming table using renamer python script
+```sh
+[kconf001@turing1 fastq]$ nano KristinaCRenamer.sh
+[kconf001@turing1 fastq]$ ls
+HADB01-A_S17_L002_R1_001.fastq  HADB01-D_S20_L002_R1_001.fastq  HADB01-G_S23_L002_R1_001.fastq  HADB01-J_S26_L002_R1_001.fastq  HADB01-M_S29_L002_R1_001.fastq  HADB01-P_S32_L002_R1_001.fastq
+HADB01-B_S18_L002_R1_001.fastq  HADB01-E_S21_L002_R1_001.fastq  HADB01-H_S24_L002_R1_001.fastq  HADB01-K_S27_L002_R1_001.fastq  HADB01-N_S30_L002_R1_001.fastq  KristinaCRenamer.sh
+HADB01-C_S19_L002_R1_001.fastq  HADB01-F_S22_L002_R1_001.fastq  HADB01-I_S25_L002_R1_001.fastq  HADB01-L_S28_L002_R1_001.fastq  HADB01-O_S31_L002_R1_001.fastq  renamingtable_complete.txt
+[kconf001@turing1 fastq]$ salloc
+salloc: Pending job allocation 9270528
+salloc: job 9270528 queued and waiting for resources 
+salloc: job 9270528 has been allocated resources 
+salloc: Granted job allocation 9270528
+[kconf001@coreV2-25-072 fastq]$ cat KristinaCRenamer.sh 
+#!/bin/bash -l 
+#SBATCH -o KristinaCRenamer.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCRenamerFastq
+[kconf001@coreV2-25-072 fastq]$ sbatch ./KristinaCRenamer.sh
+Submitted batch job 9270529
+[kconf001@coreV2-25-072 fastq]$ squeue -u kconf001
+JOBID   PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+9270529      main Kristina kconf001 PD       0:00      1 (Priority)
+9270528      main       sh kconf001  R       0:29      1 coreV2-25-072
+Once job is done running: checking to see if renaming is completed. 
+[kconf001@coreV2-25-072 fastq]$ ls -alh
+total 79G
+drwxrwxrwx 2 kconf001 users  667 Jan 27 16:02 .
+drwxrwxrwx 4 kconf001 users  212 Jan 27 14:59 ..
+-rwxrwxrwx 1 kconf001 users  226 Jan 27 16:00 KristinaCRenamer.sh
+-rwxrwxrwx 1 kconf001 users  11K Jan 27 16:02 KristinaCRenamer.txt
+-rwxr-xr-x 1 kconf001 users 4.6K Jan 27 15:00 renamingtable_complete.txt
+-rw-r--r-- 1 kconf001 users 1.2G Jan 27 13:30 RI_B_01_14.fastq
+-rw-r--r-- 1 kconf001 users 4.0G Jan 27 13:37 RI_B_01_18.fastq
+-rw-r--r-- 1 kconf001 users 4.0G Jan 27 13:32 RI_B_01_22.fastq
+-rw-r--r-- 1 kconf001 users 3.6G Jan 27 13:40 RI_B_08_SNP.fastq
+-rw-r--r-- 1 kconf001 users 981M Jan 27 13:30 RI_W_01_14.fastq
+-rw-r--r-- 1 kconf001 users 4.0G Jan 27 13:37 RI_W_01_18.fastq 
+-rw-r--r-- 1 kconf001 users 3.6G Jan 27 13:31 RI_W_01_22.fastq
+-rw-r--r-- 1 kconf001 users 6.7G Jan 27 13:40 RI_W_08_SNP.fastq
+-rw-r--r-- 1 kconf001 users 3.4G Jan 27 13:30 VA_B_01_14.fastq
+-rw-r--r-- 1 kconf001 users 3.6G Jan 27 13:35 VA_B_01_18.fastq
+-rw-r--r-- 1 kconf001 users 4.7G Jan 27 13:30 VA_B_01_22.fastq
+-rw-r--r-- 1 kconf001 users 4.4G Jan 27 13:39 VA_B_09_SNP.fastq
+-rw-r--r-- 1 kconf001 users 2.6G Jan 27 13:29 VA_W_01_14.fastq
+-rw-r--r-- 1 kconf001 users 4.6G Jan 27 13:34 VA_W_01_18.fastq
+-rw-r--r-- 1 kconf001 users  13M Jan 27 13:30 VA_W_01_22.fastq
+-rw-r--r-- 1 kconf001 users 4.4G Jan 27 13:38 VA_W_08_SNP.fastq      
+```
+         
+* 7. Update github (see #13 on Day 02 Exerises for similar workflow)
+
+* 8. Naming convention:
+* SOURCEPOPULATION_SYMBIOTICSTATE_GENOTYPE_TEMPERATURE.fastq
+* There are 2 sources: Virginia and Rhode Island
+* There are 2 symbiotic states: Brown and White  
+
+* 9. Start process of adapter clipping & quality trimming all the renamed .fastq files in batches, by lane.
+
+* 10. cp script /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Trimclipfilterstatsbatch_advbioinf.py into your scripts directory.
+
+```sh
+[kconf001@coreV2-25-072 fastq]$ exit
+logout
+salloc: Relinquishing job allocation 9270528
+[kconf001@turing1 fastq]$ cd ../../
+[kconf001@turing1 KristinaC]$ ls
+data  day03  groundrules.txt  KristinaC_Exercise1.txt  scripts
+[kconf001@turing1 KristinaC]$ cd scripts/
+[kconf001@turing1 scripts]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/scripts
+[kconf001@turing1 scripts]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Trimclipfilterstatsbatch_advbioinf.py /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/scripts
+avg_cov_len_fasta_advbioinf.py  renamer_advbioinf.py  Trimclipfilterstatsbatch_advbioinf.py
+```
+
+* 11. less/head new script & check the usage statement
+```sh
+[kconf001@turing1 scripts]$ ls
+avg_cov_len_fasta_advbioinf.py  renamer_advbioinf.py  Trimclipfilterstatsbatch_advbioinf.py
+[kconf001@turing1 scripts]$ head Trimclipfilterstatsbatch_advbioinf.py
+#!/usr/bin/env python
+# Written by Dan Barshis
+import sys, os
+########### Usage #############
+# Trimclipfilterstatsbatch.py barcodefile.txt anynumberoffastqfiles
+# This should be run from within the folder with all of your original .fastqstrim
+# Will quality trim multiple SINGLE-END fastq files
+# Things to customize for your particular platform:
+[kconf001@turing1 scripts]$  
+```
+
+* 12. cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt into the working directory with your fastq files
+```sh
+[kconf001@turing1 scripts]$ cd ../
+[kconf001@turing1 KristinaC]$ cd data/
+[kconf001@turing1 data]$ cd fastq/
+[kconf001@turing1 fastq]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq
+[kconf001@turing1 fastq]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq
+[kconf001@turing1 fastq]$ ls 
+adapterlist_advbioinf.txt   RI_B_01_18.fastq   RI_W_01_22.fastq   VA_B_09_SNP.fastq
+KristinaCRenamer.sh         RI_B_01_22.fastq   RI_W_08_SNP.fastq  VA_W_01_14.fastq
+KristinaCRenamer.txt        RI_B_08_SNP.fastq  VA_B_01_14.fastq   VA_W_01_18.fastq
+renamingtable_complete.txt  RI_W_01_14.fastq   VA_B_01_18.fastq   VA_W_01_22.fastq
+RI_B_01_14.fastq            RI_W_01_18.fastq   VA_B_01_22.fastq   VA_W_08_SNP.fastq
 ```
