@@ -29,8 +29,7 @@ exercises
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/exercises  
 ```
 
-* 4. Execute pwd command & start a log of commands 
-* with a header for today's date in README.md github logfile in local workspace
+* 4. Execute pwd command & start a log of commands with a header for today's date in README.md github logfile in local workspace
 ```sh
 lyka@LAPTOP-GFGCMDB6 MINGW64 ~
 $ pwd        
