@@ -199,7 +199,7 @@ d677019..c32c255  main -> main
 Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
 ## 01/28/2021                                                                                                                      
-#Exercises/Homework Day 03 
+# Exercises/Homework Day 03 
 *1)Make sure logged into turing node & in personal data directory. 
 Also input salloc command (see previous day for details).
 
