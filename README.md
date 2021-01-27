@@ -372,6 +372,7 @@ avg_cov_len_fasta_advbioinf.py  renamer_advbioinf.py
 ```
 
 ```sh
+less (head) new script
 [kconf001@coreV2-25-072 scripts]$ head renamer_advbioinf.py 
 #!/usr/bin/env python 
 ####usage renamer.py renamingtable 
