@@ -1,5 +1,5 @@
-## 01/22/2021
-# Exercises Day 02
+# 01/22/2021
+## Exercises Day 02
 
 * 1. Log into the Cluster
 ```sh
@@ -197,8 +197,8 @@ To https://github.com/kconf001/21SpKristinaCAdvancedGenomicsLog.git
 d677019..c32c255  main -> main
 Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
-## 01/27/2021                                                                                                                      
-# Homework Day 02 (continuation of Exercise 02) 
+# 01/27/2021                                                                                                                      
+## Homework Day 02 (continuation of Exercise 02) 
 * 1. Make sure logged into turing node & in personal data directory. 
 * Also input salloc command (see previous day for details).
 
@@ -294,8 +294,8 @@ drwxrwxrwx 2 kconf001 users   142 Jan 25 09:57 exercises
 
 * 6. Push updated README.md log to github page (see #13 in previous day).
 
-## 01/27/2021
-# Homework Day 03
+# 01/27/2021
+## Homework Day 03
 
 * 1. cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03 directory & files to personal sandbox
 ```sh
@@ -372,7 +372,6 @@ avg_cov_len_fasta_advbioinf.py  renamer_advbioinf.py
 ```
 
 ```sh
-less new script (head) & read usage statement)
 [kconf001@coreV2-25-072 scripts]$ head renamer_advbioinf.py 
 #!/usr/bin/env python 
 ####usage renamer.py renamingtable 
@@ -560,7 +559,7 @@ drwxrwxrwx 4 kconf001 users  212 Jan 27 14:59 ..
 -rw-r--r-- 1 kconf001 users  13M Jan 27 13:30 VA_W_01_22.fastq
 -rw-r--r-- 1 kconf001 users 4.4G Jan 27 13:38 VA_W_08_SNP.fastq      
 ```
-         
+
 * 7. Update github (see #13 on Day 02 Exerises for similar workflow)
 ```sh
 lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
