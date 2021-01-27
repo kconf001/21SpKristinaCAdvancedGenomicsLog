@@ -1,5 +1,5 @@
 ## 01/22/2021
-#Exercises Day 02
+# Exercises Day 02
 
 * 1. Log into the Cluster
 ```sh
@@ -295,7 +295,7 @@ drwxrwxrwx 2 kconf001 users   142 Jan 25 09:57 exercises
 * 6. Push updated README.md log to github page (see #13 in previous day).
 
 ## 01/27/2021
-# Day 03 Homework
+# Homework Day 03
 
 * 1. cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03 directory & files to personal sandbox
 ```sh
@@ -562,11 +562,33 @@ drwxrwxrwx 4 kconf001 users  212 Jan 27 14:59 ..
 ```
          
 * 7. Update github (see #13 on Day 02 Exerises for similar workflow)
+```sh
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ git add README.md
+warning: LF will be replaced by CRLF in README.md.
+The file will have its original line endings in your working directory
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ git commit -m 'updating readme'
+[main 964b72c] updating readme
+1 file changed, 235 insertions(+), 2 deletions(-)
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ git push -u origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done. 
+Writing objects: 100% (3/3), 2.99 KiB | 2.99 MiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/kconf001/21SpKristinaCAdvancedGenomicsLog.git  
+b869eb3..964b72c  main -> main 
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+```
 
 * 8. Naming convention:
 * SOURCEPOPULATION_SYMBIOTICSTATE_GENOTYPE_TEMPERATURE.fastq
 * There are 2 sources: Virginia and Rhode Island
-* There are 2 symbiotic states: Brown and White  
+* There are 2 symbiotic states: Brown and White
 
 * 9. Start process of adapter clipping & quality trimming all the renamed .fastq files in batches, by lane.
 
