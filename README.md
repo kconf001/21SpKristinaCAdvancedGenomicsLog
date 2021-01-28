@@ -561,7 +561,7 @@ drwxrwxrwx 4 kconf001 users  212 Jan 27 14:59 ..
 -rw-r--r-- 1 kconf001 users 4.4G Jan 27 13:38 VA_W_08_SNP.fastq      
 ```
 
-* 7. Update github (see #13 on Day 02 Exerises for similar workflow)
+* 7. Update github (see #13 on Exercises Day 02 for similar workflow)
 ```sh
 lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
 $ git add README.md
@@ -694,6 +694,20 @@ drwxrwxrwx 4 kconf001 users  212 Jan 27 14:59 ..
 -rw-r--r-- 1 kconf001 users  13M Jan 27 13:30 VA_W_01_22.fastq
 -rw-r--r-- 1 kconf001 users 4.4G Jan 27 13:38 VA_W_08_SNP.fastq 
 ```
-* 14. Waiting for job to finish
 
-* 15. Updated Github & README.md
+* 14. Job has finished
+```sh
+[kconf001@turing1 fastq]$ ls -alh                                                                                                                                                                                      
+total 584K                                                                                                                                                                                                             
+drwxrwxrwx 5 kconf001 users  294 Jan 28 01:59 .
+drwxrwxrwx 4 kconf001 users  212 Jan 27 14:59 ..
+drwxrwxrwx 2 kconf001 users 2.2K Jan 28 01:59 filteringstats
+-rwxrwxrwx 1 kconf001 users  226 Jan 27 16:00 KristinaCRenamer.sh
+-rwxrwxrwx 1 kconf001 users  18K Jan 27 16:32 KristinaCRenamer.txt
+-rwxrwxrwx 1 kconf001 users  310 Jan 27 17:26 KristinaCTestTrimClip.sh
+-rwxrwxrwx 1 kconf001 users 3.8K Jan 28 01:59 KristinaCTestTrimClip.txt
+drwxrwxrwx 2 kconf001 users  591 Jan 28 01:59 originalfastqs
+drwxrwxrwx 2 kconf001 users  788 Jan 28 01:59 QCFastqs
+-rwxr-xr-x 1 kconf001 users 4.6K Jan 27 15:00 renamingtable_complete.txt
+```
+* 15. Updated Github & README.md (See #7 on Homework Day 03 for similar workflow)
