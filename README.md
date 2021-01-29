@@ -711,3 +711,39 @@ drwxrwxrwx 2 kconf001 users  788 Jan 28 01:59 QCFastqs
 -rwxr-xr-x 1 kconf001 users 4.6K Jan 27 15:00 renamingtable_complete.txt
 ```
 * 15. Updated Github & README.md (See #7 on Homework Day 03 for similar workflow)
+
+# 01/29/2021
+## Homework Day 04
+
+* 1. Add trimclipstats.txt output to full class datafile /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt using the following steps
+* 1a. Run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h to examine usage
+
+```sh
+[kconf001@turing1 fastq]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h
+Written by Peter Schafran pscha005@odu.edu 5-Oct-2015
+This script takes a stats output file from fastx_clipper and converts it into a table.
+Usage: Schafran_trimstatstable.py [-c, -v, -h] inputfile.txt outputfile.txt
+Options (-c and -v must be listed separately to run together):
+-h      Display this help message
+-c      Use comma delimiter instead of tabs
+-v      Verbose mode (print steps to stdout)
+[kconf001@turing1 fastq]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq
+```
+* 1b. Run script on data with outputfilename YOURNAME_trimclipstatsout.txt
+* Had to switch to filteringstats directory because this is where the trimclipstats.txt is located.
+```sh
+[kconf001@turing1 fastq]$ cd filteringstats/ 
+[kconf001@turing1 filteringstats]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py trimclipstats.txt KristinaC_trimclipstatsout.txt 
+[kconf001@turing1 filteringstats]$ ls  
+KristinaC_trimclipstatsout.txt        RI_B_08_SNP_clipped_trimmed_stats.txt  RI_W_01_22_nucdist.png                 VA_B_01_18_nucdist.png                 VA_W_01_14_qualbox.png 
+RI_B_01_14_clipped_trimmed_stats.txt  RI_B_08_SNP_nucdist.png                RI_W_01_22_qualbox.png                 VA_B_01_18_qualbox.png                 VA_W_01_18_clipped_trimmed_stats.txt 
+RI_B_01_14_nucdist.png                RI_B_08_SNP_qualbox.png                RI_W_08_SNP_clipped_trimmed_stats.txt  VA_B_01_22_clipped_trimmed_stats.txt   VA_W_01_18_nucdist.png 
+RI_B_01_14_qualbox.png                RI_W_01_14_clipped_trimmed_stats.txt   RI_W_08_SNP_nucdist.png                VA_B_01_22_nucdist.png                 VA_W_01_18_qualbox.png 
+RI_B_01_18_clipped_trimmed_stats.txt  RI_W_01_14_nucdist.png                 RI_W_08_SNP_qualbox.png                VA_B_01_22_qualbox.png                 VA_W_01_22_clipped_trimmed_stats.txt 
+RI_B_01_18_nucdist.png                RI_W_01_14_qualbox.png                 trimclipstats.txt                      VA_B_09_SNP_clipped_trimmed_stats.txt  VA_W_01_22_nucdist.png 
+RI_B_01_18_qualbox.png                RI_W_01_18_clipped_trimmed_stats.txt   VA_B_01_14_clipped_trimmed_stats.txt   VA_B_09_SNP_nucdist.png                VA_W_01_22_qualbox.png         
+RI_B_01_22_clipped_trimmed_stats.txt  RI_W_01_18_nucdist.png                 VA_B_01_14_nucdist.png                 VA_B_09_SNP_qualbox.png                VA_W_08_SNP_clipped_trimmed_stats.txt 
+RI_B_01_22_nucdist.png                RI_W_01_18_qualbox.png                 VA_B_01_14_qualbox.png                 VA_W_01_14_clipped_trimmed_stats.txt   VA_W_08_SNP_nucdist.png 
+RI_B_01_22_qualbox.png                RI_W_01_22_clipped_trimmed_stats.txt   VA_B_01_18_clipped_trimmed_stats.txt   VA_W_01_14_nucdist.png                 VA_W_08_SNP_qualbox.png 
+```
