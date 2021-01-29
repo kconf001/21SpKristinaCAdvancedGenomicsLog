@@ -747,3 +747,56 @@ RI_B_01_22_clipped_trimmed_stats.txt  RI_W_01_18_nucdist.png                 VA_
 RI_B_01_22_nucdist.png                RI_W_01_18_qualbox.png                 VA_B_01_14_qualbox.png                 VA_W_01_14_clipped_trimmed_stats.txt   VA_W_08_SNP_nucdist.png 
 RI_B_01_22_qualbox.png                RI_W_01_22_clipped_trimmed_stats.txt   VA_B_01_18_clipped_trimmed_stats.txt   VA_W_01_14_nucdist.png                 VA_W_08_SNP_qualbox.png 
 ```
+* 1c. Add KristinaC_trimclipstatsout.txt to the class file (Fulltrimclipstatstable.txt).
+* check to make sure things are in the correct directory first!
+
+```sh
+[kconf001@turing1 filteringstats]$ cd /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/
+[kconf001@turing1 Astrangia_poculata]$ ls -alh 
+total 320K
+drwxrwxrwx 4 dbarshis users  105 Jan 29 01:17 .
+drwxrwxrwx 3 dbarshis users   36 Jan 21 23:36 ..
+-rwxr-xr-x 1 dbarshis users  29K Jan 29 01:18 Fulltrimclipstatstable.txt 
+drwxrwxrwx 2 dbarshis users 4.8K Jan 21 23:37 originalfastqs 
+drwxrwxrwx 2 dbarshis users  337 Jan 29 00:52 refassembly 
+[kconf001@turing1 Astrangia_poculata]$ cd /cm/shared/courses//dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq/filteringstats/
+[kconf001@turing1 filteringstats]$ salloc
+salloc: Pending job allocation 9271098
+salloc: job 9271098 queued and waiting for resources
+salloc: job 9271098 has been allocated resources
+salloc: Granted job allocation 9271098 
+[kconf001@coreV2-25-072 filteringstats]$ tail -n +2 KristinaC_trimclipstatsout.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt
+
+```
+* 2. Map reads back to assembly using Bowtie2 alignment algorithm
+* 3. Write sbatch (in QCFastqs directory) script to do Bowtie2/2.4 on _clippedtrimmedfiltered.fastq data files from data in personal sandbox
+
+```sh
+[kconf001@coreV2-25-072 filteringstats]$ cd ../
+[kconf001@coreV2-25-072 fastq]$ cd QCFastqs/
+[kconf001@coreV2-25-072 QCFastqs]$ nano KristinaCBowtieln.sh
+[kconf001@coreV2-25-072 QCFastqs]$ cat KristinaCBowtieln.sh
+
+#!/bin/bash -l
+
+#SBATCH -o KristinaCbowtieln.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCBowtieln
+
+module load bowtie2/2.4
+for i in *_clippedtrimmed.fastq; do bowtie2 --rg-id ${i%_clippedtrimmed.fastq} \
+--rg SM:${i%_clippedtrimmed.fastq} \
+--very-sensitive -x /cm/shared/courses/dbarshis/18AdvBioinf/classdata/Astrangia_poculata/refassembly/ast_hostsym -U $i \
+> ${i%_clippedtrimmedfilterd.fastq}.sam; done
+
+[kconf001@coreV2-25-072 QCFastqs]$ sbatch KristinaCBowtieln.sh 
+Submitted batch job 9271110 
+[kconf001@coreV2-25-072 QCFastqs]$ squeue -u kconf001 
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9271110      main Kristina kconf001  R       0:01      1 coreV2-25-007
+           9271098      main       sh kconf001  R      35:31      1 coreV2-25-072 
+```
+* 4. Updated README.md & github (See #7 on Homework Day 03 for similar workflow)
+
