@@ -798,5 +798,47 @@ Submitted batch job 9271110
            9271110      main Kristina kconf001  R       0:01      1 coreV2-25-007
            9271098      main       sh kconf001  R      35:31      1 coreV2-25-072 
 ```
+* Job is complete; should get _clippedtrimmed.fastq.sam files
+```sh
+[kconf001@turing1 QCFastqs]$ ls -alh
+total 184G
+drwxrwxrwx 2 kconf001 users 1.7K Jan 29 21:18 .
+drwxrwxrwx 5 kconf001 users  294 Jan 28 01:59 ..
+-rwxrwxrwx 1 kconf001 users  470 Jan 29 15:15 KristinaCBowtieln.sh 
+-rwxrwxrwx 1 kconf001 users 3.5K Jan 29 21:48 KristinaCbowtieln.txt
+-rwxrwxrwx 1 kconf001 users 3.5K Jan 29 21:48 KristinaCbowtieln.txt
+-rwxrwxrwx 1 kconf001 users 1.1G Jan 28 00:45 RI_B_01_14_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 1.8G Jan 29 15:25 RI_B_01_14_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.5G Jan 28 00:47 RI_B_01_18_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 5.7G Jan 29 15:54 RI_B_01_18_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.5G Jan 28 00:50 RI_B_01_22_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 5.7G Jan 29 16:23 RI_B_01_22_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.2G Jan 28 00:52 RI_B_08_SNP_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 5.2G Jan 29 16:51 RI_B_08_SNP_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 886M Jan 28 00:53 RI_W_01_14_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 1.4G Jan 29 16:59 RI_W_01_14_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.6G Jan 28 00:56 RI_W_01_18_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 5.9G Jan 29 17:29 RI_W_01_18_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.0G Jan 28 00:58 RI_W_01_22_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 4.9G Jan 29 17:53 RI_W_01_22_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 5.9G Jan 28 01:02 RI_W_08_SNP_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 9.7G Jan 29 18:41 RI_W_08_SNP_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.0G Jan 28 01:05 VA_B_01_14_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 4.9G Jan 29 19:04 VA_B_01_14_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.3G Jan 28 01:07 VA_B_01_18_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 5.1G Jan 29 19:25 VA_B_01_18_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 4.2G Jan 28 01:10 VA_B_01_22_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 6.9G Jan 29 19:58 VA_B_01_22_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.9G Jan 28 01:13 VA_B_09_SNP_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 6.5G Jan 29 20:29 VA_B_09_SNP_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 2.3G Jan 28 01:15 VA_W_01_14_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 3.7G Jan 29 20:46 VA_W_01_14_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 4.1G Jan 28 01:18 VA_W_01_18_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 6.7G Jan 29 21:18 VA_W_01_18_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users  11M Jan 28 01:18 VA_W_01_22_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users  22M Jan 29 21:18 VA_W_01_22_clippedtrimmed.fastq.sam
+-rwxrwxrwx 1 kconf001 users 3.9G Jan 28 01:21 VA_W_08_SNP_clippedtrimmed.fastq
+-rwxrwxrwx 1 kconf001 users 6.4G Jan 29 21:48 VA_W_08_SNP_clippedtrimmed.fastq.sam
+```
 * 4. Updated README.md & github (See #7 on Homework Day 03 for similar workflow)
 
