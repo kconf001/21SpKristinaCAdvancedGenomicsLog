@@ -841,4 +841,32 @@ drwxrwxrwx 5 kconf001 users  294 Jan 28 01:59 ..
 -rwxrwxrwx 1 kconf001 users 6.4G Jan 29 21:48 VA_W_08_SNP_clippedtrimmed.fastq.sam
 ```
 * 4. Updated README.md & github (See #7 on Homework Day 03 for similar workflow)
+# 02/03/2021
+## Homework Day 05
+* 1. Combine data with partner (KCKC directory- with Katie Crider)
+```sh
+cp /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq/QCFastqs *.fastq /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/katiecrider/data/fastq/KCKCfastq
+```
+* 2. Run Triniry denovo assembler for two the two combined lanes
+* 3. Modify sbatch script below
+```sh
+#!/bin/bash -l
 
+#SBATCH -o KCKCTrinitydenovo.txt
+#SBATCH -n 32
+#SBATCH -p himem
+#SBATCH --mail-user=kcrid001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KCKCTrinitydenovo
+
+enable_lmod
+module load container_env trinity
+
+crun Trinity --seqType fq --max_memory 768G --normalize_reads --single RI_B_04_14_clippedtrimmed.fastq,VA_B_04_14_clippedtrimmed.fastq,RI_B_04_18_clippedtrimmed.fastq,VA_B_04_18_clippedtrimmed.fastq,RI_B_04_22_clippedtrimmed.fastq,VA_B_04_22_clippedtrimmed.fastq,RI_B_05_14_clippedtrimmed.fastq,VA_B_05_14_clippedtrimmed.fastq,RI_W_04_14_clippedtrimmed.fastq,VA_W_04_14_clippedtrimmed.fastq,RI_W_04_18_clippedtrimmed.fastq,VA_W_04_18_clippedtrimmed.fastq,RI_W_04_22_clippedtrimmed.fastq,VA_W_04_22_clippedtrimmed.fastq,RI_W_05_14_clippedtrimmed.fastq,VA_W_05_14_clippedtrimmed.fastq,RI_B_01_14_clippedtrimmed.fastq,RI_B_01_18_clippedtrimmed.fastq,RI_B_01_22_clippedtrimmed.fastq,RI_B_08_SNP_clippedtrimmed.fastq,RI_W_01_14_clippedtrimmed.fastq,RI_W_01_18_clippedtrimmed.fastq,RI_W_01_22_clippedtrimmed.fastq,RI_W_08_SNP_clippedtrimmed.fastq,VA_B_01_14_clippedtrimmed.fastq,VA_B_01_18_clippedtrimmed.fastq,VA_B_01_22_clippedtrimmed.fastq,VA_B_09_SNP_clippedtrimmed.fastq,VA_W_01_14_clippedtrimmed.fastq,VA_W_01_18_clippedtrimmed.fastq,VA_W_01_22_clippedtrimmed.fastq,VA_W_08_SNP_clippedtrimmed.fastq --CPU 32
+```
+* 4. Check https://trinityrnaseq.github.io/ for usage info
+* 5. Submit Trinity script
+```sh
+[kconf001@coreV2-25-072 QCFastqs]$ sbatch KCKCTrinity.sh 
+```
+* 6. We were experiencing some problems with the job input, had to change some parts of the .sbatch script.
