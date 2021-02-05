@@ -870,3 +870,220 @@ crun Trinity --seqType fq --max_memory 768G --normalize_reads --single RI_B_04_1
 [kconf001@coreV2-25-072 QCFastqs]$ sbatch KCKCTrinity.sh 
 ```
 * 6. We were experiencing some problems with the job input, had to change some parts of the .sbatch script.
+# 02/05/2021
+## Homework Day 6
+* 1. Start interactive session via salloc & run cm/shared/apps/trinity/2.0.6/util/TrinityStats.pl script on your Trinity.fasta output from your assembly
+```sh
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~ $ ssh kconf001@turing.hpc.odu.edu
+kconf001@turing.hpc.odu.edu's password:
+Last login: Wed Feb  3 15:02:28 2021 from ip70-160-48-140.hr.hr.cox.net
+[kconf001@turing1 ~]$ salloc
+salloc: Pending job allocation 9272854
+salloc: job 9272854 queued and waiting for resources
+salloc: job 9272854 has been allocated resources
+salloc: Granted job allocation 9272854
+[kconf001@coreV3-23-024 ~]$cd /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/katiecrider/data/fastq/KCKCfastq/trinity_out_dir
+[kconf001@coreV3-23-024 trinity_out_dir]$ /cm/shared/apps/trinity/2.0.6/util/TrinityStats.pl Trinity.fasta
+################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':  39219
+Total trinity transcripts: 41303
+Percent GC: 44.54
+########################################
+Stats based on ALL transcript contigs:
+########################################
+Contig N10: 1323
+Contig N20: 783
+Contig N30: 562
+Contig N40: 440
+Contig N50: 364
+Median contig length: 277
+Average contig: 371.08
+Total assembled bases: 15326666
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+Contig N10: 1094
+Contig N20: 682
+Contig N30: 511
+Contig N40: 410
+Contig N50: 347
+Median contig length: 274
+Average contig: 355.69
+Total assembled bases: 13949619
+```
+
+* 2. Compare this with the output from avg_cov_len_fasta_advbioinf.py 
+on our class reference assembly (/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta) and add both to your logfile
+```sh
+[kconf001@coreV3-23-024 trinity_out_dir]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta
+The total number of sequences is 15079
+The average sequence length is 876
+The total number of bases is 13210470
+The minimum sequence length is 500
+The maximum sequence length is 10795
+The N50 is 881
+Median Length = 578
+contigs < 150bp = 0
+contigs >= 500bp = 15079
+contigs >= 1000bp = 3660
+contigs >= 2000bp = 536
+```
+
+* 3. Less or head your bowtie2 job output file to look at your alignment statistics and calculate the following from the information:
+* 3a. Mean % "Overall alignment rate"
+```sh
+[kconf001@coreV3-23-024 trinirt_our_dir]$ cd /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq/QCFastqs 
+[kconf001@coreV3-23-024 QCFastqs]$ grep "overall alignment rate" KristinaCbowtieln.txt
+89.71% overall alignment rate
+91.95% overall alignment rate
+91.31% overall alignment rate
+92.53% overall alignment rate
+65.88% overall alignment rate
+93.03% overall alignment rate
+93.80% overall alignment rate
+93.07% overall alignment rate
+90.51% overall alignment rate
+79.87% overall alignment rate
+91.41% overall alignment rate
+92.94% overall alignment rate
+93.42% overall alignment rate
+93.54% overall alignment rate
+95.85% overall alignment rate
+92.74% overall alignment rate
+[kconf001@coreV3-23-024 QCFastqs]$ grep "overall alignment rate" KristinaCbowtieln.txt | cut -d " " -f 1 | cut -d "%" -f 1
+89.71
+91.95
+91.31
+92.53
+65.88
+93.03
+93.80
+93.07
+90.51
+79.87
+91.41
+92.94
+93.42
+93.54
+95.85
+92.74 
+Calculate mean on Excel, mean % overall alignment rate is 89.89933
+```
+ 
+* 3b. Mean % reads "aligned exactly 1 time"
+```sh
+[kconf001@coreV3-23-024 QCFastqs]$ grep "aligned exactly 1 time" KristinaCbowtieln.txt
+425341 (5.89%) aligned exactly 1 time
+1336595 (5.57%) aligned exactly 1 time
+1309089 (5.42%) aligned exactly 1 time
+1148628 (5.28%) aligned exactly 1 time
+313795 (5.25%) aligned exactly 1 time
+1058240 (4.28%) aligned exactly 1 time
+894094 (4.34%) aligned exactly 1 time
+1825387 (4.49%) aligned exactly 1 time
+1191456 (5.74%) aligned exactly 1 time
+1757128 (7.79%) aligned exactly 1 time
+1659193 (5.71%) aligned exactly 1 time
+1277294 (4.72%) aligned exactly 1 time
+626232 (4.08%) aligned exactly 1 time
+1217713 (4.36%) aligned exactly 1 time
+1865 (2.60%) aligned exactly 1 time
+1229632 (4.58%) aligned exactly 1 time
+[kconf001@coreV3-23-024 QCFastqs]$ grep "aligned exactly 1 time" KristinaCbowtieln.txt | cut -d "(" -f 2 | cut -d "%" -f 1
+5.89
+5.57
+5.42
+5.28
+5.25
+4.28
+4.34
+4.49
+5.74
+7.79
+5.71
+4.72
+4.08
+4.36
+2.60
+4.58
+Calculate mean on Excel, mean % reads aligned exactly 1 time is 5.00625
+```
+* 3c. Mean # of reads "aligned exactly 1 time
+```sh
+[kconf001@coreV3-23-024 QCFastqs]$ grep "aligned exactly 1 time" KristinaCbowtieln.txt
+425341 (5.89%) aligned exactly 1 time
+1336595 (5.57%) aligned exactly 1 time
+1309089 (5.42%) aligned exactly 1 time
+1148628 (5.28%) aligned exactly 1 time
+313795 (5.25%) aligned exactly 1 time
+1058240 (4.28%) aligned exactly 1 time
+894094 (4.34%) aligned exactly 1 time
+1825387 (4.49%) aligned exactly 1 time
+1191456 (5.74%) aligned exactly 1 time
+1757128 (7.79%) aligned exactly 1 time
+1659193 (5.71%) aligned exactly 1 time
+1277294 (4.72%) aligned exactly 1 time
+626232 (4.08%) aligned exactly 1 time
+1217713 (4.36%) aligned exactly 1 time
+1865 (2.60%) aligned exactly 1 time
+1229632 (4.58%) aligned exactly 1 time
+[kconf001@coreV3-23-024 QCFastqs]$ grep "aligned exactly 1 time" KristinaCbowtieln.txt | cut -d " " -f 5
+425341
+1336595
+1309089
+1148628
+313795
+1058240
+894094
+1825387
+1191456
+1757128
+1659193
+1277294
+626232
+1217713
+1865
+1229632
+Calculate mean on Excel, mean # of reads alligned exactly 1 time is 1079480
+```
+
+* 3d. Mean % reads "aligned >1 times"
+```sh
+[kconf001@coreV3-23-024 QCFastqs]$ grep "aligned >1 times" KristinaCbowtieln.txt
+6056902 (83.83%) aligned >1 times
+20712542 (86.38%) aligned >1 times
+20741901 (85.89%) aligned >1 times
+18972847 (87.25%) aligned >1 times
+3627297 (60.63%) aligned >1 times
+21931999 (88.74%) aligned >1 times
+18425413 (89.46%) aligned >1 times
+35983989 (88.58%) aligned >1 times
+17579848 (84.76%) aligned >1 times
+16251697 (72.08%) aligned >1 times
+24925544 (85.71%) aligned >1 times
+23877047 (88.22%) aligned >1 times
+13722839 (89.34%) aligned >1 times
+24899339 (89.18%) aligned >1 times
+66899 (93.25%) aligned >1 times
+23648840 (88.15%) aligned >1 times
+[kconf001@coreV3-23-024 QCFastqs]$ grep "aligned >1 times" KristinaCbowtieln.txt | cut -d "(" -f 2 | cut -d "%" -f 1
+83.83
+86.38
+85.89
+87.25
+60.63
+88.74
+89.46
+88.58
+84.76
+72.08
+85.71
+88.22
+89.34
+89.18
+93.25
+88.15
+Calculate mean on Excel, mean % reads aligned >1 times is 85.09063.
+```
