@@ -1087,3 +1087,8 @@ Calculate mean on Excel, mean # of reads alligned exactly 1 time is 1079480
 88.15
 Calculate mean on Excel, mean % reads aligned >1 times is 85.09063.
 ```
+* 4. Add statistics as single rows to shared table
+```sh
+[kconf001@coreV3-23-024 QCFastqs]$ nano KristinaCalignstats.txt                                                                                                            
+[kconf001@coreV3-23-024 QCFastqs]$ cat KristinaCalignstats.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt
+```
