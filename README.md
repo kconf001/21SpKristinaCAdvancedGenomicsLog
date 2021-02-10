@@ -1271,5 +1271,17 @@ Submitted batch job 9276468
 ```
 * 3. Run the following to start genotyping your SNPs for filtering next week
 ```sh
-
+[kconf001@coreV3-23-040 QCFastqs]$ nano KristinaCfreebayessubref.sh
+[kconf001@coreV3-23-040 QCFastqs]$ cat KristinaCfreebayessubref.sh
+#!/bin/bash -l
+#SBATCH -o KristinaCfreebayessubref.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCfreebayessubref
+enable_lmod
+module load dDocent
+freebayes --genotype-qualities -f /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta *.bam > KristinaCmergedfastqs.vcf
+[kconf001@coreV3-23-040 QCFastqs]$ sbatch KristinaCfreebayessubref.sh
+Submitted batch job 9276565 
 ```
