@@ -1224,7 +1224,8 @@ Submitted batch job 9276430
 #SBATCH --mail-type=END
 #SBATCH --job-name=KristinaCBlastparse
 /cm/shared/apps/trinity/2.0.6/util/analyze_blastPlus_topHit_coverage.pl blastx.outfmt6 Trinity.fasta /cm/shared/apps/blast/databases/uniprot_sprot_Sep2018.fasta
-[kconf001@coreV3-23-040 testassembly]$ sbatch KristinaCBlastparse.sh                                      Submitted batch job 9276467
+[kconf001@coreV3-23-040 testassembly]$ sbatch KristinaCBlastparse.sh 
+Submitted batch job 9276467
 ```
 * 2. Rm UNSORTED.bam's from your QCFastqs directory (or wherever your .bams and .sams are)
 ```sh
