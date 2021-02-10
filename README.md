@@ -1227,6 +1227,33 @@ Submitted batch job 9276430
 [kconf001@coreV3-23-040 testassembly]$ sbatch KristinaCBlastparse.sh 
 Submitted batch job 9276467
 ```
+* Output of sprot 
+```sh
+[kconf001@coreV3-23-040 testassembly]$ cat blastx.outfmt6.hist
+#hit_pct_cov_bin        count_in_bin    >bin_below
+100     212     212
+90      98      310
+80      104     414
+70      137     551
+60      182     733
+50      256     989
+40      413     1402
+30      719     2121
+20      1440    3561
+10      984     4545
+[kconf001@coreV3-23-040 testassembly]$ grep -c '>' Trinity.fasta
+41303
+[kconf001@coreV3-23-040 testassembly]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py Trinity.fasta
+The total number of sequences is 41303
+The average sequence length is 371
+The total number of bases is 15326666
+The minimum sequence length is 184
+The maximum sequence length is 10771
+The N50 is 364
+Median Length = 627
+contigs < 150bp = 0
+contigs >= 500bp = 5936
+```
 * 2. Rm UNSORTED.bam's from your QCFastqs directory (or wherever your .bams and .sams are)
 ```sh
 [kconf001@coreV3-23-040 QCFastqs]$ cd /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq/QCFastqs
