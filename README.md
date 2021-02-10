@@ -1210,4 +1210,38 @@ done
 [kconf001@coreV3-23-040 QCFastqs]$ sbatch KristinaCbamsort.sh
 Submitted batch job 9276430
 ```
+# 02/10/2021
+## Homework Day 7
+
+* 1. Run the following command on your sprot output file to process into the contig length/match format that trinity examines
+```sh
+[kconf001@coreV3-23-040 testassembly]$ nano KristinaCBlastparse.sh
+[kconf001@coreV3-23-040 testassembly]$ cat KristinaCBlastparse.sh
+#!/bin/bash -l
+#SBATCH -o KristinaCBlastparse.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001.odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCBlastparse
+/cm/shared/apps/trinity/2.0.6/util/analyze_blastPlus_topHit_coverage.pl blastx.outfmt6 Trinity.fasta /cm/shared/apps/blast/databases/uniprot_sprot_Sep2018.fasta
+[kconf001@coreV3-23-040 testassembly]$ sbatch KristinaCBlastparse.sh                                      Submitted batch job 9276467
+```
+* 2. Rm UNSORTED.bam's from your QCFastqs directory (or wherever your .bams and .sams are)
+```sh
+[kconf001@coreV3-23-040 QCFastqs]$ cd /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq/QCFastqs
+[kconf001@coreV3-23-040 QCFastqs]$ nano KristinaCrmsortbam.sh
+[kconf001@coreV3-23-040 QCFastqs]$ cat KristinaCrmsortbam.sh
+#!/bin/bash -l
+#SBATCH -o KristinaCrmunsortbam.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCrmunsortbam
+rm *UNSORTED.bam
+[kconf001@coreV3-23-040 QCFastqs]$ sbatch KristinaCrmsortbam.sh
+Submitted batch job 9276468
+```
+* 3. Run the following to start genotyping your SNPs for filtering next week
+```sh
+
 ```
