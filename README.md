@@ -1092,7 +1092,51 @@ Calculate mean on Excel, mean % reads aligned >1 times is 85.09063.
 [kconf001@coreV3-23-024 QCFastqs]$ nano KristinaCalignstats.txt                                                                                                            
 [kconf001@coreV3-23-024 QCFastqs]$ cat KristinaCalignstats.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt
 ```
-* 5 & 6: Having issues accessing Trinity.fasta files (file & directory not found)
+* 5 & 6: Having issues accessing Trinity.fasta files (file & directory not found)- managed to find Trinity.fasta files, currently sbatch is running
+* 5. Data cleanup & archiving
+* 5a. Move Trinity.fasta file into new testassembly directory
+```sh
+[kconf001@coreV3-23-040 testassembly]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/katiecrider/data/testassembly/Trinity.fasta /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/       
+[kconf001@coreV3-23-040 testassembly]$ mv Trinity.fasta /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/testassembly
+```
+* 5b. sbatch script to rm -r original fastqs * filteringstats (Could not remove -trinity_out_dir since it is already gone- forgot to cp to sandbox
+```sh
+[kconf001@coreV3-23-040 testassembly]$ nano Cleanup.sh
+[kconf001@coreV3-23-040 testassembly]$ cat Cleanup.sh
+#!/bin/bash -l
+
+#SBATCH -o KristinaCCleanup.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCCleanup
+
+rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq/originalfastqs
+rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/fastq/filteringstats
+[kconf001@coreV3-23-040 testassembly]$ sbatch Cleanup.sh
+Submitted batch job 9276432
+```
+* 6. Submit blast job from testassembly directory
+```sh
+[kconf001@turing1 testassembly]$ nano KristinaCBlast.sh
+[kconf001@turing1 testassembly]$ cat KristinaCBlast.sh
+#!/bin/bash -l
+#SBATCH -o KristinaCBlast.txt
+#SBATCH -n 6
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCBlast
+enable_lmod container_env blast
+blastx -query Trinity.fasta -db /cm/shared/apps/blast/databases/uniprot_sprot_Sep2018 -out blastx.outfmt6 \
+-evalue 1e-20 -num_threads 6 -max_target_seqs 1 -outfmt 6
+[kconf001@turing1 testassembly]$ sbatch KristinaCBlast.sh
+Submitted batch job 9276434
+[kconf001@turing1 testassembly]$ squeue -u kconf001
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+9276434      main Kristina kconf001 PD       0:00      1 (Priority)
+9276428      main       sh kconf001  R      45:55      1 coreV3-23-040
+9276430      main Kristina kconf001  R      29:25      1 coreV3-23-040                                              
+```
 * 7. Head one of the .sam files to look at the header
 ```sh
 [kconf001@coreV3-23-040 QCFastqs]$ head VA_W_08_SNP_clippedtrimmed.fastq.sam
