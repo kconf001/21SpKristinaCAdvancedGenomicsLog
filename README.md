@@ -1092,3 +1092,78 @@ Calculate mean on Excel, mean % reads aligned >1 times is 85.09063.
 [kconf001@coreV3-23-024 QCFastqs]$ nano KristinaCalignstats.txt                                                                                                            
 [kconf001@coreV3-23-024 QCFastqs]$ cat KristinaCalignstats.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt
 ```
+* 5 & 6: Having issues accessing Trinity.fasta files (file & directory not found)
+* 7. Head one of the .sam files to look at the header
+```sh
+[kconf001@coreV3-23-040 QCFastqs]$ head VA_W_08_SNP_clippedtrimmed.fastq.sam
+@HD     VN:1.0  SO:unsorted
+@SQ     SN:AstrangiaT1FW_1      LN:4823
+@SQ     SN:AstrangiaT1FW_10     LN:1096
+@SQ     SN:AstrangiaT1FW_11     LN:2560
+@SQ     SN:AstrangiaT1FW_12     LN:2686
+@SQ     SN:AstrangiaT1FW_13     LN:629
+@SQ     SN:AstrangiaT1FW_15     LN:582
+@SQ     SN:AstrangiaT1FW_16     LN:502
+@SQ     SN:AstrangiaT1FW_17     LN:1492
+@SQ     SN:AstrangiaT1FW_18     LN:1197
+```
+* 8. grep -v '@' sam | head to look at sequence read files, this works because '@' denotes the start of a sequence.
+```sh
+[kconf001@coreV3-23-040 QCFastqs]$ grep -v "@" VA_W_08_SNP_clippedtrimmed.fastq.sam | head                                                                                                                                                     
+K00188:59:HMTFHBBXX:2:1101:4026:1648    0       AstrangiaT1FW_65377     610     1       51M     *       0       0       CNCGTTAATCCATTCATGCGCGTCACTAATTAGATGACGAGGCATTTGGCT     A#AAF-A-AFFJAJFJJA<7-AJJA7JJJ<FJJJJ<F<<JFFJJJJ-AJJF    AS:i:-1 XS:i:-1 XN:i:0  XM:i:1  XO:i:0  XG:i:0  NM:i:1  MD:Z:1T49       YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                       K00188:59:HMTFHBBXX:2:1101:4614:1648    0       AstrangiaT1FW_488087    41      1       51M     *       0       0       GNTCTTGATTAATGAAAACATTCTTGGCAAATGCTTTCGCAGTAGTTCGTC     A#AFFJJJJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJJJJJJFJJJJJJ    AS:i:-1 XS:i:-1 XN:i:0  XM:i:1  XO:i:0  XG:i:0  NM:i:1  MD:Z:1T49       YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                       K00188:59:HMTFHBBXX:2:1101:5690:1648    16      AstrangiaT1FW_65728     10184   1       51M     *       0       0       AGACGAACTACTGCGAAAGCATTTGCCAAGAATGTTTTCATTAATCAAGNG     FJFAJJJAJJJJJFJJJJJJJJJJF-AJFF<JJJJJJJJJJJJAJJFFA#A    AS:i:-6 XS:i:-6 XN:i:0  XM:i:2  XO:i:0  XG:i:0  NM:i:2  MD:Z:49A0C0     YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                       
+K00188:59:HMTFHBBXX:2:1101:3772:1666    16      AstrangiaT1FW_65718     4457    1       51M     *       0       0       TTGAAGACCGAAGTGGAGAAAGGTTCCATGTGAACAGCAGTTGGACATGNG     7JJFFJJAJJF<JJJJFJJJJJJJJ7JFJJ<FFA<JJJFJJJJJJJFFA#<    AS:i:-1 XS:i:-1 XN:i:0  XM:i:1  XO:i:0  XG:i:0  NM:i:1  MD:Z:49G1       YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                       K00188:59:HMTFHBBXX:2:1101:5051:1666    16      AstrangiaT1FW_131671    3       1       51M     *       0       0       ACAGATGTGCCGCCCCAGCCAAACTCCCAACCTGACGGTGTCTTGGACTNG     JJFJJFJJFJJJJJJFJJJJJFJJJJJJFFJFFJAJJJJJJJJJJJFAA#A    AS:i:-6 XS:i:-6 XN:i:0  XM:i:2  XO:i:0  XG:i:0  NM:i:2  MD:Z:49C0C0     YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                       K00188:59:HMTFHBBXX:2:1101:5172:1666    0       AstrangiaT1FW_65662     1901    1       51M     *       0       0       TNCGACGGGCGGTGTGTACAAAGGGCAGGGACGTAATCAACGCGAGCTGAT     A#AFFJAJJJJJJJFJFFJJJJFF-AJJJJJJJJJJJJJJJFJJJJJAJJ7    AS:i:-6 XS:i:-6 XN:i:0  XM:i:2  XO:i:0  XG:i:0  NM:i:2  MD:Z:0A0G49     YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                       
+K00188:59:HMTFHBBXX:2:1101:5680:1666    0       AstrangiaT1FW_65668     593     1       51M     *       0       0       GNGCATTGCTGAGTCCATTCGTTTCCCTTTCAACGGTTTCACGTACTTTTT     A#-AFFJFJJ7JJJJJJFFJ<FFFF-FJJFJJJF<AFF7FJJAJFJJ7FJJ    AS:i:-1 XS:i:-1 XN:i:0  XM:i:1  XO:i:0  XG:i:0  NM:i:1  MD:Z:1C49       YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                       K00188:59:HMTFHBBXX:2:1101:6674:1666    16      AstrangiaT1FW_65718     1086    1       23M     *       0       0       TCCCAGGAGCATGTCTGTCTGNG FF<JJJJAJJJJJJJJJJFFA#A AS:i:-1 XS:i:-1 XN:i:0  XM:i:1  XO:i:0  XG:i:0 NM:i:1  MD:Z:21A1       YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                                                                                       
+K00188:59:HMTFHBBXX:2:1101:7060:1666    0       AstrangiaT1FW_65712     6946    1       51M     *       0       0       CNAAATTTGACGATCGATTTGCACGTCAGAATCGCTACGAGCCTCCACCAG     A#AFFJFFJJJJJFJJJJJJJJJJ<-FJJJJFJJJJJJJJJJJJJJJJJJF    AS:i:-1 XS:i:-1 XN:i:0  XM:i:1  XO:i:0  XG:i:0  NM:i:1  MD:Z:1C49       YT:Z:UU RG:Z:VA_W_08_SNP                                                                                                       K00188:59:HMTFHBBXX:2:1101:7080:1666    0       AstrangiaT1FW_65718     10568   0       51M     *       0       0       TNTTGCAATAGTAATTCTGCTCAGTACGAGAGGAACCGCAGATTCAGACAA     A#AFFJJJFJJJJJJJJJJJ-FJAAAJJJFJJJJJJJJJJJJJJJJJJJJJ    AS:i:-13        XS:i:-19        XN:i:0  XM:i:3  XO:i:0  XG:i:0  NM:i:3  MD:Z:1G16T3G28  YT:Z:UU RG:Z:VA_W_08_SNP     
+```
+* 9. Run get_explain_sam_flags phython script on .sam files
+```sh
+
+[kconf001@coreV3-23-040 QCFastqs]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/get_explain_sam_flags_advbioinf.py VA_W_01_22_clippedtrimmed.fastq.sam RI_B_01_18_clippedtrimmed.fastq.sam RI_W_01_14_clippedtrimmed.fastq.sam RI_B_01_22_clippedtrimmed.fastq.sam                                                                                                                                                                       
+VA_W_01_22_clippedtrimmed.fastq.sam
+['0', '4', '16']
+0 :
+4 :
+read unmapped
+16 :
+read reverse strand
+RI_B_01_18_clippedtrimmed.fastq.sam
+['0', '4', '16']
+0 :
+4 :
+read unmapped
+16 :
+read reverse strand
+RI_W_01_14_clippedtrimmed.fastq.sam
+['0', '4', '16']
+0 :
+4 :
+read unmapped
+16 :
+read reverse strand
+RI_B_01_22_clippedtrimmed.fastq.sam
+['0', '4', '16']
+0 :
+4 :
+read unmapped
+16 :        
+```
+* 10. Run read sorting step fo SNP calling 
+```sh
+[kconf001@coreV3-23-040 QCFastqs]$ nano KristinaCbamsort.sh 
+[kconf001@coreV3-23-040 QCFastqs]$ cat KristinaCbamsort.sh
+#!/bin/bash -l
+#SBATCH -o KristinaCBamSort.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCBamSort
+enable_lmod
+module load samtools/1
+for i in *.sam; do `samtools view -bS $i > ${i%.sam}_UNSORTED.bam`; done
+for i in *UNSORTED.bam; do samtools sort $i > ${i%_UNSORTED.bam}.bam
+samtools index ${i%_UNSORTED.bam}.bam
+done
+[kconf001@coreV3-23-040 QCFastqs]$ sbatch KristinaCbamsort.sh
+Submitted batch job 9276430
+```
+```
