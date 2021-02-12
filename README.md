@@ -1285,3 +1285,217 @@ freebayes --genotype-qualities -f /cm/shared/courses/dbarshis/21AdvGenomics/clas
 [kconf001@coreV3-23-040 QCFastqs]$ sbatch KristinaCfreebayessubref.sh
 Submitted batch job 9276565 
 ```
+[kconf001@coreV3-23-050 QCFastqs]$ mv *.sam ../../sams/
+```
+	-Make a BAMS folder and mv all your .bam files and .bam.bai files into that directory
+```sh
+[kconf001@coreV3-23-050 QCFastqs]$ cd ../../
+[kconf001@coreV3-23-050 data]$ mkdir bams
+[kconf001@coreV3-23-050 data]$ cd fastq/QCFastqs/
+[kconf001@coreV3-23-050 QCFastqs]$ mv *.bam *.bam.bai ../../bams/
+```
+
+	-rm your _unfiltered.vcf files and .fastq files if you have any
+
+```sh
+[kconf001@coreV3-23-050 QCFastqs]$ rm *_unfiltered.vcf
+[kconf001@coreV3-23-050 QCFastqs]$ rm *.fastq 
+[kconf001@coreV3-23-050 QCFastqs]$ ls -alh
+total 8.2M
+drwxrwxrwx 2 kconf001 users  408 Feb 12 12:56 .
+drwxrwxrwx 3 kconf001 users  230 Feb 10 08:52 ..
+-rwxrwxrwx 1 kconf001 users   37 Feb  5 14:50 KristinaCalignstats.txt
+-rwxrwxrwx 1 kconf001 users  389 Feb 10 08:26 KristinaCbamsort.sh
+-rwxrwxrwx 1 kconf001 users  946 Feb 10 09:48 KristinaCBamSort.txt
+-rwxrwxrwx 1 kconf001 users  470 Jan 29 15:15 KristinaCBowtieln.sh
+-rwxrwxrwx 1 kconf001 users 3.5K Jan 29 21:48 KristinaCbowtieln.txt
+-rwxrwxrwx 1 kconf001 users  398 Feb 10 14:20 KristinaCfreebayessubref.sh
+-rwxrwxrwx 1 kconf001 users 1.2K Feb 11 19:14 KristinaCfreebayessubref.txt
+-rwxrwxrwx 1 kconf001 users 5.3M Feb 11 19:14 KristinaCmergedfastqs.vcf
+-rwxrwxrwx 1 kconf001 users  193 Feb 10 12:48 KristinaCrmsortbam.sh
+-rwxrwxrwx 1 kconf001 users    0 Feb 10 12:48 KristinaCrmunsortbam.txt 
+```
+
+-Make a VCF folder in your data directory and mv your YOURNAMEmergedfastqs.vcf into this directory (if your freebayes job didn't complete then skip this step)
+```sh
+[kconf001@coreV3-23-050 QCFastqs]$ mkdir ../../vcf
+[kconf001@coreV3-23-050 QCFastqs]$ cd ../../vcf  
+```
+
+* 2. Start an interactive session via salloc (already done after logging in, see previous assignments for similar workflows)
+
+* 3. cp the /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/VCF/mergedfastq_HEAAstrangiaAssembly.vcf to your VCF folder
+
+```sh
+[kconf001@coreV3-23-050 vcf]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/VCF/mergedfastq_HEAAstrangiaAssembly.vcf /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/vcf
+[kconf001@coreV3-23-050 vcf]$ ls -alh
+total 2.1G
+drwxrwxrwx 2 kconf001 users   54 Feb 12 12:59 .
+drwxrwxrwx 8 kconf001 users  307 Feb 12 12:57 ..
+-rwxr-xr-x 1 kconf001 users 1.5G Feb 12 13:00 mergedfastq_HEAAstrangiaAssembly.vcf
+```
+* 4. Determine the number of individuals and variant sites in the class vcf file (and yours if it worked) using:
+/cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+
+```sh
+[kconf001@coreV3-23-050 vcf]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+Parameters as interpreted:
+--vcf mergedfastq_HEAAstrangiaAssembly.vcf
+After filtering, kept 40 out of 40 Individuals
+After filtering, kept 1214003 out of a possible 1214003 Sites
+Run Time = 5.00 seconds
+```
+* 5. cp the /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/VCF/GoodCoralGenelistForVCFSubsetter.txt into your directory with your .vcf files
+```sh
+[kconf001@coreV3-23-050 vcf]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/VCF/GoodCoralGenelistForVCFSubsetter.txt /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/vcf 
+```
+
+* 6. Run our host vcf extractor on your merged vcf file using the following syntax:
+
+/cm/shared/courses/dbarshis/21AdvBioinf/scripts/21Sp_vcfsubsetter_advbioinf.py GoodCoralGenelistForVCFSubsetter.txt mergedfastq_HEAAstrangiaAssembly.vcf
+
+```sh
+[kconf001@coreV3-23-050 vcf]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/21Sp_vcfsubsetter_advbioinf.py GoodCoralGenelistForVCFSubsetter.txt mergedfastq_HEAAstrangiaAssembly.vcf                               
+Read in ContigList
+```
+
+* 7 Compare the number of variant sites in your three files (YOURNAMEmergedfastqs.vcf,  mergedfastq_HEAAstrangiaAssembly.vcf, and  mergedfastq_HEAAstrangiaAssembly_subset.vcf) using:
+/cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf
+```sh
+[kconf001@coreV3-23-050 vcf]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools
+--vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+Parameters as interpreted:
+--vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf
+After filtering, kept 40 out of 40 Individuals
+After filtering, kept 432676 out of a possible 432676 Sites
+Run Time = 6.00 seconds
+[kconf001@coreV3-23-050 vcf]$
+[kconf001@coreV3-23-050 vcf]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools
+--vcf mergedfastq_HEAAstrangiaAssembly.vcf
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+--vcf mergedfastq_HEAAstrangiaAssembly.vcf
+Run Time = 5.00 seconds   ```sh
+ 
+```
+
+* 8. Work through the VCF filtering tutorial until the following step:
+```sh
+[kconf001@coreV3-23-050 vcf]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+Parameters as interpreted:
+--vcf mergedfastq_HEAAstrangiaAssembly.vcf
+After filtering, kept 40 out of 40 Individuals
+After filtering, kept 1214003 out of a possible 1214003 Sites
+Run Time = 5.00 seconds
+[kconf001@coreV3-23-050 vcf]$ vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf --max-missing 0.5 --mac 3 --minQ 30 --recode --recode-INFO-all --out raw.g5mac3
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+Parameters as interpreted:
+--vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf
+--recode-INFO-all
+--mac 3
+--minQ 30
+--max-missing 0.5
+--out raw.g5mac3
+--recode
+After filtering, kept 40 out of 40 Individuals
+Outputting VCF file...
+After filtering, kept 99853 out of a possible 432676 Sites
+Run Time = 26.00 seconds
+[kconf001@coreV3-23-050 vcf]$ vcftools --vcf raw.g5mac3.recode.vcf --minDP 3 --recode --recode-INFO-all --out raw.g5mac3dp3
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+Parameters as interpreted:
+--vcf raw.g5mac3.recode.vcf
+--recode-INFO-all
+--minDP 3
+--out raw.g5mac3dp3
+--recode
+After filtering, kept 40 out of 40 Individuals
+Outputting VCF file...
+After filtering, kept 99853 out of a possible 99853 Sites
+Run Time = 24.00 seconds
+[kconf001@coreV3-23-050 vcf]$ vcftools --vcf raw.g5mac3dp3.recode.vcf --missing-indv
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+Parameters as interpreted:
+--vcf raw.g5mac3dp3.recode.vcf
+--missing-indv
+After filtering, kept 40 out of 40 Individuals
+Outputting Individual Missingness
+After filtering, kept 99853 out of a possible 99853 Sites
+Run Time = 3.00 seconds
+[kconf001@coreV3-23-050 vcf]$ bash
+kconf001@coreV3-23-050:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/vcf$ mawk '!/IN/' out.imiss | cut -f5 > totalmissing
+kconf001@coreV3-23-050:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/vcf$ gnuplot << \EOF
+> set terminal dumb size 120, 30
+> set autoscale
+> unset label
+> set title "Histogram of % missing data per individual"
+> set ylabel "Number of Occurrences"
+> set xlabel "% of missing data"
+> #set yr [0:100000]
+> binwidth=0.01
+> bin(x,width)=width*floor(x/width) + binwidth/2.0
+> plot 'totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+> pause -1
+> EOF
+♀ 
+Histogram of % missing data per individual
+Number of Occurrences
+3 ++----------+-----------+-----------+-----------+------------+---***-----+-----------+-----------+----------++ 
++           +           +           +           +       'totalmissing' using (bin($1,binwidth)):(1.0) ****** +
+|                                                                * *
+|                                                                                          
+|                                                                * *                                         
+|                                                                                          
+|                                                                * *                                         
+|                                                                                          
+|                                                                * *                                         
+|                                                                                      
+2.5 ++                                                           * *                                          ++
+|                                                                * *                                         
+|                                                                                          
+|                                                                * *                                         
+|                                                                                          
+|                                                                * *                                         
+|                                                                                          
+|                                                                * *                                         
+|                                                                                          
+|                                                                * *                                         
+|                                                                                        
+2 ++                                                     **      * * ***  ******    ** ****   ****             ++
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                          
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                          
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                          
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                          
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                      
+1.5 ++                                                   **      * * * *  * *  *    ** ** *   *  *            ++
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                          
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                          
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                          
+|                                                        **      * * * *  * *  *    ** ** *   *  *           
+|                                                                                          
++           +           +           +           +        **  +   * * * * +* *  *    ** ** *   *  *             +
+1 *********************************************************************************************************---++
+0.1         0.2         0.3         0.4         0.5          0.6         0.7         0.8         0.9          1
+% of missing data
+```
+
+Now that we have a list of individuals to remove, we can feed that directly into VCFtools for filtering.
+
+vcftools --vcf raw.g5mac3dp3.recode.vcf --remove lowDP.indv --recode --recode-INFO-all --out raw.g5mac3dplm
