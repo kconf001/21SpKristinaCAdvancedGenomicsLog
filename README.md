@@ -1210,8 +1210,8 @@ done
 [kconf001@coreV3-23-040 QCFastqs]$ sbatch KristinaCbamsort.sh
 Submitted batch job 9276430
 ```
-# 02/10/2021
-## Homework Day 7
+# 02/12/2021
+## Homework Day 8
 
 * 1. Run the following command on your sprot output file to process into the contig length/match format that trinity examines
 ```sh
