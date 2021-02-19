@@ -1499,3 +1499,337 @@ Number of Occurrences
 Now that we have a list of individuals to remove, we can feed that directly into VCFtools for filtering.
 
 vcftools --vcf raw.g5mac3dp3.recode.vcf --remove lowDP.indv --recode --recode-INFO-all --out raw.g5mac3dplm
+# 02/17/2021
+## Homework Day 09
+
+* 1-  Run one of the following sets of prescribed filters on your mergedfastq_HEAAstrangiaAssembly_subset.vcf, note these are fairly conservative filters
+##Half the class run the following /cm/shared/apps/vcftools/0.1.12b/bin/vcftools 
+--vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf 
+--maf 0.015 
+--max-alleles 2 
+--max-missing 0.5 
+--minQ 30 
+--minGQ 20 
+--minDP 3 
+--remove-indels 
+--hwe 0.01 
+--recode 
+--recode-INFO-all 
+--out 18718_mergedfastq_HEAAstrangiaAssembly_subset_ClassFilters
+```sh
+[kconf001@coreV3-23-002 vcf]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf 
+--max-missing 0.5 
+--mac 3 
+--minQ 30 
+--minDP 10 
+--max-alleles 2 
+--maf 0.015 
+--remove-indels 
+--recode 
+--recode-INFO-all 
+--out 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters
+After filtering, kept 40 out of 40 Individuals
+Outputting VCF file...
+After filtering, kept 18718 out of a possible 432676 Sites
+Run Time = 11.00 seconds 
+```
+
+
+##the other half run the filters we used from the paper
+/cm/shared/apps/vcftools/0.1.12b/bin/vcftools 
+--vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf 
+--max-missing 0.5 
+--mac 3 
+--minQ 30 
+--minDP 10 
+--max-alleles 2 
+--maf 0.015 
+--remove-indels 
+--recode 
+--recode-INFO-all 
+--out 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters
+
+```sh
+[kconf001@coreV3-23-002 vcf]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf 
+--max-missing 0.5 
+--mac 3 
+--minQ 30 
+--minDP 10 
+--max-alleles 2 
+--maf 0.015 
+--remove-indels 
+--recode 
+--recode-INFO-all 
+--out 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+Parameters as interpreted:
+--vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf
+--recode-INFO-all
+--mac 3
+--maf 0.015
+--max-alleles 2
+--minDP 10
+--minQ 30
+--max-missing 0.5
+--out 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters
+--recode
+--remove-indels
+After filtering, kept 40 out of 40 Individuals
+Outputting VCF file...
+After filtering, kept 1578 out of a possible 432676 Sites
+Run Time = 5.00 seconds  
+```    
+* 2- Make a population file containing two columns with no header, tab delimited text the first column should be the individual name and the second column the population to which that individual belongs
+
+```sh 
+[kconf001@coreV3-23-002 vcf]$ grep '#CHROM' mergedfastq_HEAAstrangiaAssembly_subset.vcf  > samplenames.txt
+[kconf001@coreV3-23-002 vcf]$ cat samplenames.txt
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  
+RI_W_06_merged
+RI_W_07_merged
+VA_B_03_merged
+RI_W_02_merged
+RI_W_04_merged
+VA_W_09_SNP_clipped
+RI_B_08_SNP_clipped
+VA_W_08_SNP_clipped
+VA_B_08_SNP_clipped
+VA_W_02_merged
+VA_B_07_merged
+RI_B_05_merged
+VA_W_06_merged
+VA_W_04_merged
+VA_W_01_merged
+VA_B_10_SNP_clipped
+VA_B_06_merged
+VA_W_05_merged
+RI_B_09_SNP_clipped
+VA_W_10_SNP_clipped
+RI_W_08_SNP_clipped
+RI_B_06_merged
+RI_W_10_SNP_clipped
+RI_B_04_merged
+VA_W_03_merged
+RI_B_07_merged
+RI_W_05_merged
+RI_W_09_SNP_clipped
+VA_B_01_merged
+VA_B_09_SNP_clipped
+RI_B_10_SNP_clipped
+RI_W_01_merged
+RI_B_01_merged
+VA_B_04_merged
+RI_B_02_merged
+RI_W_03_merged
+VA_B_02_merged
+VA_W_07_merged
+VA_B_05_merged
+RI_B_03_merged
+[kconf001@coreV3-23-002 vcf]$ nano samplenames.txt 
+```
+Need to edit the file on excel or use sed 's/\s\+/\n/g' samplenames. txt
+
+or use .imiss file (the one I used)
+```sh
+[kconf001@coreV3-23-002 vcf]$ cat out.imiss
+INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
+RI_W_06_merged  99853   0       67075   0.671737
+RI_W_07_merged  99853   0       63917   0.640111
+RI_W_02_merged  99853   0       73105   0.732126
+RI_W_04_merged  99853   0       71159   0.712638
+VA_W_09_SNP_clipped     99853   0       19459   0.194876
+RI_B_08_SNP_clipped     99853   0       88110   0.882397
+VA_W_08_SNP_clipped     99853   0       83344   0.834667
+VA_B_08_SNP_clipped     99853   0       94221   0.943597
+VA_W_02_merged  99853   0       71050   0.711546
+VA_B_07_merged  99853   0       62687   0.627793
+RI_B_05_merged  99853   0       43945   0.440097
+VA_W_06_merged  99853   0       65164   0.652599
+VA_W_04_merged  99853   0       50911   0.509859
+VA_W_01_merged  99853   0       67150   0.672489
+VA_B_10_SNP_clipped     99853   0       82831   0.829529
+VA_B_06_merged  99853   0       57724   0.57809
+VA_W_05_merged  99853   0       66297   0.663946
+RI_B_09_SNP_clipped     99853   0       85107   0.852323
+VA_W_10_SNP_clipped     99853   0       83234   0.833565
+RI_W_08_SNP_clipped     99853   0       77802   0.779165
+RI_B_06_merged  99853   0       79766   0.798834
+RI_W_10_SNP_clipped     99853   0       91323   0.914574
+RI_B_04_merged  99853   0       46717   0.467858
+VA_W_03_merged  99853   0       64016   0.641102
+RI_B_07_merged  99853   0       70798   0.709022
+RI_W_05_merged  99853   0       57117   0.572011
+RI_W_09_SNP_clipped     99853   0       88492   0.886223
+VA_B_01_merged  99853   0       47217   0.472865
+VA_B_09_SNP_clipped     99853   0       79187   0.793036
+RI_B_10_SNP_clipped     99853   0       82779   0.829009
+RI_W_01_merged  99853   0       73169   0.732767
+RI_B_01_merged  99853   0       69619   0.697215
+VA_B_04_merged  99853   0       58190   0.582757
+RI_B_02_merged  99853   0       87439   0.875677
+RI_W_03_merged  99853   0       38760   0.388171
+VA_B_02_merged  99853   0       78381   0.784964
+VA_W_07_merged  99853   0       64592   0.646871
+VA_B_05_merged  99853   0       54401   0.544811
+RI_B_03_merged  99853   0       80369   0.804873
+
+[kconf001@coreV3-23-002 vcf]$ cut -f 1 out.imiss | tail -n +2
+RI_W_06_merged
+RI_W_07_merged
+VA_B_03_merged
+RI_W_04_merged
+VA_W_09_SNP_clipped
+RI_B_08_SNP_clipped
+VA_W_08_SNP_clipped
+VA_B_08_SNP_clipped
+VA_W_02_merged
+VA_B_07_merged
+RI_B_05_merged
+VA_W_06_merged
+VA_W_04_merged
+VA_W_01_merged
+VA_B_10_SNP_clipped
+VA_B_06_merged
+VA_W_05_merged
+RI_B_09_SNP_clipped
+VA_W_10_SNP_clipped
+RI_W_08_SNP_clipped
+RI_B_06_merged
+RI_W_10_SNP_clipped
+RI_B_04_merged
+VA_W_03_merged
+RI_B_07_merged
+RI_W_05_merged
+RI_W_09_SNP_clipped
+VA_B_01_merged
+VA_B_09_SNP_clipped
+RI_B_10_SNP_clipped
+RI_W_01_merged
+RI_B_01_merged
+VA_B_04_merged
+RI_B_02_merged
+RI_W_03_merged
+VA_B_02_merged
+VA_W_07_merged
+VA_B_05_merged
+RI_B_03_merged
+```
+then edit on Excel (seperate columns, =LEFT(A1,4), then paste to a popfile.txt
+
+```sh
+[kconf001@coreV3-23-002 vcf]$ nano popfile.txt
+```
+* 3- Convert your filtered .vcf file to genepop format using the following command:
+/cm/shared/courses/dbarshis/21AdvGenomics/scripts/vcftogenepop_advbioinf.py YOURFILTERED.vcf YOUR_PopFile.txt
+
+```sh
+[kconf001@coreV3-23-002 vcf]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/vcftogenepop_advbioinf.py 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode.vcf popfile.txt
+Indivs with genotypes in vcf file: 
+RI_W_06_merged  
+RI_W_07_merged
+VA_B_03_merged
+RI_W_02_merged
+RI_W_04_merged
+VA_W_09_SNP_clipped
+RI_B_08_SNP_clipped
+VA_W_08_SNP_clipped
+VA_B_08_SNP_clipped
+VA_W_02_merged
+VA_B_07_merged
+RI_B_05_merged
+VA_W_06_merged
+VA_W_04_merged
+VA_W_01_merged
+VA_B_10_SNP_clipped
+VA_B_06_merged
+VA_W_05_merged
+RI_B_09_SNP_clipped
+VA_W_10_SNP_clipped
+RI_W_08_SNP_clipped
+RI_B_06_merged
+RI_W_10_SNP_clipped
+RI_B_04_merged
+VA_W_03_merged
+RI_B_07_merged    
+RI_W_05_merged
+RI_W_09_SNP_clipped  
+VA_B_01_merged
+VA_B_09_SNP_clipped
+RI_B_10_SNP_clipped
+RI_W_01_merged
+RI_B_01_merged
+VA_B_04_merged
+RI_B_02_merged
+RI_W_03_merged
+VA_B_02_merged
+VA_W_07_merged
+VA_B_05_merged
+RI_B_03_merged
+44 
+1578 
+1578 
+1578 
+1578 
+40 
+```
+
+* 4- SCP your YOURFILE_allfilters.recode_subset_genepop.gen file to your laptop
+```sh
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ scp kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/vcf/1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen /c/Users/lyka/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog/         
+kconf001@turing.hpc.odu.edu's password:
+1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen
+100%  343KB   2.5MB/s   00:00    
+```
+* 5- Switch to the adegenet_PCAs.R script and follow through the steps to produce some of the figures.
+
+In r-studio:
+```sh
+> setwd("~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog")
+> datafile<-read.genepop('1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen', ncode=2)
+Converting data from a Genepop .gen file to a genind object... 
+File description:  AllSNPs 
+...done.
+```
+
+adegenet_PCAs.R script
+```sh
+library("ape")
+library("pegas")
+library("seqinr")
+library("ggplot2")
+library("adegenet")
+setwd("~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog/Rstudio")
+datafile<-read.genepop('1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen', ncode=2)
+sum(is.na(datafile$tab))
+datafile #shows info
+YOURdata<-scaleGen(datafile, NA.method='mean')
+X<-YOURdata
+Y<-as.factor(substring(pop(datafile),1,4))
+pca1 <- dudi.pca(X,cent=F, scale=F, scannf=F, nf=3)
+
+#### PCAs ####
+# individual labels
+# s.label(pca1$li)
+
+# population elipses
+s.class(pca1$li, pop(datafile))
+
+#color symbols, pop names
+#pdf("YOURINITIALS_ColorPCA1v2.pdf")
+col <- c("blue","red", "green", "black")
+s.class(pca1$li, Y,xax=1,yax=2, col=transp(col,.6), axesell=F, cstar=0, cpoint=3, grid=FALSE, addaxes=TRUE)
+add.scatter.eig(pca1$eig[1:3], 3,1,2, posi="topright")
+title("PCA of DJB_data\naxes 1-2")
+#dev.off()
+
+#### Snapclust ####
+a.clust<-snapclust(datafile, k = 2)
+class(a.clust)
+names(a.clust)
+a.tab <- table(pop(datafile), a.clust$group)
+table.value(a.tab, col.labels = 1:2)
+
+compoplot(a.clust)
+```
