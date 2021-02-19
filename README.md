@@ -1833,3 +1833,60 @@ table.value(a.tab, col.labels = 1:2)
 
 compoplot(a.clust)
 ```
+# 02/19/2021
+## Homework Day 10
+
+* 1- Work through the adegenet_PCAs.R script and follow through the steps to produce some of the figures.
+
+###run step 2 as an sbatch .sh script because it will take a while to finish (Didn't run an sbatch)
+* 2- cd into your SAMS folder containing your .sams and run the following as an sbatch script on your sam files to generate read mapping counts from each individual file:
+/cm/shared/courses/dbarshis/21AdvGenomics/scripts/countxpression_SB_advbioinf.py *.sam
+
+```sh
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~ ssh kconf001@turing.hpc.odu.edu
+kconf001@turing.hpc.odu.edu's password:
+Last login: Wed Feb 17 08:47:42 2021 from ip70-160-48-140.hr.hr.cox.net
+[kconf001@turing1 ~]$ cd /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/sams
+[kconf001@turing1 sams]$ salloc
+salloc: Pending job allocation 9280868
+salloc: job 9280868 queued and waiting for resources
+salloc: job 9280868 has been allocated resources
+salloc: Granted job allocation 9280868
+[kconf001@coreV2-25-015 sams]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/countxpression_SB_advbioinf.py *.sam 
+```
+
+* 3- Once your job from step 1 is finished, start an salloc session and run the following on your outputted _counts.txt files:
+/cm/shared/courses/dbarshis/21AdvGenomics/scripts/ParseExpression2BigTable_advbioinf.py /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/host_genelist.txt KristinaCFullCounts_summed.txt NoMatch *_counts.txt
+
+```sh
+[kconf001@coreV2-25-015 sams]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/ParseExpression2BigTable_advbioinf.py /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/host_genelist.txt KristinaCFullCounts_summed.txt NoMatch *_counts.txt
+Hits not matched
+RI_B_01_14_clippedtrimmed.fastq_counts.txt=13381
+RI_B_01_18_clippedtrimmed.fastq_counts.txt=13381
+RI_B_01_22_clippedtrimmed.fastq_counts.txt=13381
+RI_B_08_SNP_clippedtrimmed.fastq_counts.txt=13381
+RI_W_01_14_clippedtrimmed.fastq_counts.txt=13381
+RI_W_01_18_clippedtrimmed.fastq_counts.txt=13381
+RI_W_01_22_clippedtrimmed.fastq_counts.txt=13381
+RI_W_08_SNP_clippedtrimmed.fastq_counts.txt=13381
+VA_B_01_14_clippedtrimmed.fastq_counts.txt=13381
+VA_B_01_18_clippedtrimmed.fastq_counts.txt=13381
+VA_B_01_22_clippedtrimmed.fastq_counts.txt=13381
+VA_B_09_SNP_clippedtrimmed.fastq_counts.txt=13381
+VA_W_01_14_clippedtrimmed.fastq_counts.txt=13381
+VA_W_01_18_clippedtrimmed.fastq_counts.txt=13381
+VA_W_01_22_clippedtrimmed.fastq_counts.txt=13381
+VA_W_08_SNP_clippedtrimmed.fastq_counts.txt=13381 
+```
+* 4- scp YOURNAMEFullCounts_summed.txt to your laptop
+```sh
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ scp kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC/data/sams/KristinaCFullCounts_summed.txt /c/Users/lyka/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog/
+kconf001@turing.hpc.odu.edu's password:
+KristinaCFullCounts_summed.txt
+100% 1972KB   3.4MB/s   00:00 
+```
+
+* 5- edit the first line of YOURNAMEFullCounts_summed.txt to remove the _counts.txt_UniqueTotReads from each sample name to just retain the actual informative part of the sample name (e.g., RI_W_06_18)
+
+File had no match???
