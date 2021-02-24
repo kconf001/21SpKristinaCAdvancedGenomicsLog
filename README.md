@@ -1890,3 +1890,188 @@ KristinaCFullCounts_summed.txt
 * 5- edit the first line of YOURNAMEFullCounts_summed.txt to remove the _counts.txt_UniqueTotReads from each sample name to just retain the actual informative part of the sample name (e.g., RI_W_06_18)
 
 File had no match???
+
+# 02/24/2021
+## Homework Day 11
+* 1 . Download the DESeq2Script_advbioinf.R script and work through on the shared djbFullCounts_summed.txt file
+```sh
+### This is an R script that implements the program DESeq2 for gene expression analysis.
+### Much more information on the program and specific function (particularly for checking quality) 
+### can be found here: https://www.bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html
+### The elements of this script were written by Melissa Pespeni and Daniel Barshis.
+
+#Only need to do this the first time to install the package
+#for R version 4.0
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+#  install.packages("BiocManager")
+
+#BiocManager::install("DESeq2")
+
+#a#for older versions of R
+#source("https://bioconductor.org/biocLite.R")
+#biocLite("DESeq2")
+
+library(DESeq2)
+library(gplots)
+
+vignette('DESeq2')
+
+setwd("Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog/Rstudio/Day11")  # The drag and drop from finder works in R, too.
+
+#useful functions
+#head() - prints out the top 6 lines
+#dim() - prints the dimensions of a variable
+#nrow() - returns the number of rows in a vector or matrix
+# ?[functionName] - opens documentation describing the function
+
+#read in your data to make counts table
+countsTable <- read.delim('djbFullCounts_summed.txt', header=TRUE, stringsAsFactors=TRUE, row.names=1)
+head(countsTable)
+dim(countsTable)
+colSums(countsTable)
+colSums(countsTable)[order(colSums(countsTable))]
+LowCounts<-c("VA_W_02_22","VA_W_01_22","RI_B_03_18")
+names(countsTable)%in%LowCounts
+!(names(countsTable)%in%LowCounts)
+countsTable<-countsTable[,!(names(countsTable)%in%LowCounts)]
+dim(countsTable)
+
+#make a table with conditions of each individual (e.g. "VA" and "RI")  There should be the same number of conditions described as there are samples in your data file, and in the same order.
+#NOTE: It is absolutely critical that the columns of the count matrix and the rows of the column data (information about samples) are in the same order. DESeq2 will not make guesses as to which column of the count matrix belongs to which row of the column data, these must be provided to DESeq2 already in consistent order.
+#Here's an example
+# Sample		Origin	SymState	Temp  Origin_SymState Origin_SymState_Temp
+# RI_B_06_18		RI	B	18  RI_B  RI_B_18
+# VA_B_07_14		VA	B	14  VA_B  VA_B_14
+# VA_W_07_22		VA	W	22  VA_W  VA_W_22
+# safest way to do this is in R
+
+conds<-data.frame("Sample"=names(countsTable))
+conds$Origin<-factor(substring(conds$Sample,1,2))
+conds$SymState<-factor(substring(conds$Sample,4,4))
+conds$Temp<-factor(substring(conds$Sample,9,10))
+conds$Origin_SymState<-factor(paste(conds$Origin,conds$SymState, sep="_"))
+conds$Origin_SymState_Temp<-factor(paste(conds$Origin,conds$SymState,conds$Temp, sep="_"))
+
+##Check null counts per sample
+prop.null <- apply(countsTable, 2, function(x) 100*mean(x==0))
+
+barplot(prop.null, main="Percentage of null counts per sample", 
+        horiz=TRUE, cex.names=0.5, las=1, 
+        col=conds$Origin_SymState_Temp, ylab='Samples', xlab='% of null counts')
+
+pdf(file="OverallNullCounts.pdf",14, 14)
+barplot(prop.null, main="Percentage of null counts per sample", 
+        horiz=TRUE, cex.names=0.5, las=1, 
+        col=conds$Origin_SymState_Temp, ylab='Samples', xlab='% of null counts')
+dev.off()
+
+# how many genes have mean count >=3 
+means = apply(countsTable, 1, mean)
+table(means>=3)
+
+countsTable<-countsTable[means>=3,]
+dim(countsTable)
+
+prop.nullv2 <- apply(countsTable, 2, function(x) 100*mean(x==0))
+pdf(file="Mean3NullCounts.pdf",14, 14)
+barplot(prop.nullv2, main="Percentage of null counts per sample", 
+        horiz=TRUE, cex.names=0.5, las=1, 
+        col=conds$Origin_SymState_Temp, ylab='Samples', xlab='% of null counts')
+dev.off()
+
+#make count data set
+dds <- DESeqDataSetFromMatrix(countData=countsTable, colData=conds, design=~ Origin_SymState_Temp)
+
+dds <- DESeq(dds)
+
+#transform counts to variance stablized counts
+vstCounts<-varianceStabilizingTransformation(dds)
+
+#plot cluster dendrogram across samples
+dists<-dist(t(assay(vstCounts)))
+plot(hclust(dists))
+
+plotPCA(vstCounts, intgroup="Origin")
+plotPCA(vstCounts, intgroup="SymState")
+plotPCA(vstCounts, intgroup="Temp")
+plotPCA(vstCounts, intgroup="Origin_SymState")
+plotPCA(vstCounts, intgroup="Origin_SymState_Temp")
+
+resultsNames(dds)
+
+dim(dds)
+
+###Figure out which contrast you want to examine (i.e. which two groups do you want to compare)
+res <- results(dds, contrast=c("Origin_SymState_Temp", "RI_B_18", "VA_B_18"))
+head(res)
+summary(res)
+
+res <- results(dds, contrast=c("Origin_SymState_Temp", "RI_W_18", "VA_W_18"))
+summary(res)
+
+res <- results(dds, contrast=c("Origin_SymState_Temp", "RI_B_14", "VA_B_14"))
+summary(res)
+
+res <- results(dds, contrast=c("Origin_SymState_Temp", "RI_W_14", "VA_W_14"))
+summary(res)
+
+res <- results(dds, contrast=c("Origin_SymState_Temp", "RI_B_22", "VA_B_22"))
+summary(res)
+
+res <- results(dds, contrast=c("Origin_SymState_Temp", "RI_W_22", "VA_W_22"))
+summary(res)
+
+head(res[order(res$padj),])
+plotCounts(dds, "TR2367|c0_g1_i1_coral", intgroup="Origin_SymState_Temp")
+
+#count the number of significantly differentially expressed genes
+sum(res$padj < 0.3, na.rm =T)
+sum(res$padj < 0.2, na.rm =T)
+sum(res$padj < 0.1, na.rm =T)
+sum(res$pvalue < 0.05, na.rm =T)
+											 
+# Make a counts table that is scaled by the size factors
+scaledcounts = counts(dds, normalized=T)
+
+#building heat map data
+head(scaledcounts)
+genes4heatmap<-res[res$pvalue <0.05 & !is.na(res$pvalue),]
+names(genes4heatmap)
+head(genes4heatmap)
+dim(genes4heatmap)
+data4heatmap<-scaledcounts[row.names(scaledcounts)%in%row.names(genes4heatmap),]
+dim(data4heatmap)
+head(data4heatmap)
+
+temp = as.matrix(rowMeans(data4heatmap))
+head(temp)
+scaledmatrix<-matrix(data=temp, nrow=nrow(data4heatmap), ncol=ncol(data4heatmap), byrow=FALSE)
+data4heatmapscaled = data4heatmap/scaledmatrix
+head(data4heatmapscaled)
+
+dim(data4heatmapscaled)
+
+pairs.breaks <- seq(0, 3.0, by=0.1)
+length(pairs.breaks)
+mycol <- colorpanel(n=30, low="black", high="yellow") 
+
+pdf(file="XXXXXX_byrow.pdf",14,7)
+heatmap.2(data.matrix(data4heatmapscaled), Rowv=T, Colv=F, dendrogram = c("row"), scale="none", keysize=1, breaks=pairs.breaks, col=mycol, trace = "none", symkey = F, density.info = "density", colsep=c(24), sepcolor=c("white"), sepwidth=c(.1,.1), margins=c(10,10), labRow=F)
+dev.off()
+
+pdf(file="XXXXXX_bycolumn.pdf",14,7)
+heatmap.2(data.matrix(data4heatmapscaled), Rowv=T, Colv=T, dendrogram = c("col"), scale="none", keysize=1, breaks=pairs.breaks, col=mycol, trace = "none", symkey = F, density.info = "density", colsep=c(24), sepcolor=c("white"), sepwidth=c(.1,.1), margins=c(10,10), labRow=F)
+dev.off()
+
+
+###PCAs
+plotPCA(vstCounts[rownames(vstCounts)%in%row.names(genes4heatmap),], intgroup="Origin")
+
+prop.nullv3 <- apply(countsTable[rownames(countsTable)%in%row.names(genes4heatmap),], 2, function(x) 100*mean(x==0))
+pdf(file="ResNullCounts.pdf",14, 14)
+barplot(prop.nullv3, main="Percentage of null counts per sample", 
+        horiz=TRUE, cex.names=0.5, las=1, 
+        col=conds$Origin_SymState_Temp, ylab='Samples', xlab='% of null counts')
+dev.off()
+
+```
