@@ -2075,6 +2075,19 @@ barplot(prop.nullv3, main="Percentage of null counts per sample",
 dev.off()
 
 ```
+# 03/03/2021
+## Homework Day 13 (last day!!)
+
+* 1. create an sbatch script to rm -r your sandbox/YOURNAME directory
+```sh
+[kconf001@coreV2-25-007 sandboxes]$ nano KristinaCRemoveSandbox.sh
+[kconf001@coreV2-25-007 sandboxes]$ cat KristinaCRemoveSandbox.sh
+#!/bin/bash -l
+#SBATCH -o KristinaCRemoveSandbox.txt
+#SBATCH -n 1
+#SBATCH --mail-user=kconf001@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=KristinaCRemoveSandbox
 rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC
 
 ```
