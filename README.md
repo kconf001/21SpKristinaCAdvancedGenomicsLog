@@ -2075,3 +2075,51 @@ barplot(prop.nullv3, main="Percentage of null counts per sample",
 dev.off()
 
 ```
+rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/KristinaC
+
+```
+* 2. submit your sbatch script and add the entry to your logfile/readme
+
+```sh
+[kconf001@coreV2-25-007 sandboxes]$ sbatch KristinaCRemoveDirectory.sh
+[kconf001@coreV2-25-007 sandboxes]$ squeue -u kconf001
+[kconf001@coreV2-25-007 sandboxes]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes
+```
+
+* 3. scp your github logfile to the /cm/shared/courses/dbarshis/21AdvGenomics/archive with the name LASTNAME_FIRSTNAME_readme.md
+```sh
+$ scp KristinaCREADME.md kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/archive
+```
+
+* 4. scp the following files to your local computer (copied directly to AdvancedGeomicsAnalysis 21SpKristinaCAdvancedGenomicsLog)
+	scp YOURMIDASID@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta ./
+	scp YOURMIDASID@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta.fai ./
+	scp YOURMIDASID@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/dan/data/BAMS/RI_B_01/RI_B_01.bam ./
+	scp YOURMIDASID@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/dan/data/BAMS/RI_B_01/RI_B_01.bam.bai ./
+
+```sh
+
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ scp kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta ./
+kconf001@turing.hpc.odu.edu's password:
+15079_Apoc_hostsym.fasta
+100%   13MB   5.7MB/s   00:02
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ scp kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta.fai ./
+kconf001@turing.hpc.odu.edu's password:
+15079_Apoc_hostsym.fasta.fai
+100%  641KB   3.8MB/s   00:00 
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ scp kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/dan/data/BAMS/RI_B_01/RI_B_01.bam ./
+kconf001@turing.hpc.odu.edu's password:
+RI_B_01.bam
+lyka@LAPTOP-GFGCMDB6 MINGW64 ~/Desktop/Files/ODU/ODUSPRING2021/AdvanceGenomicsAnalysis/21SpKristinaCAdvancedGenomicsLog (main)
+$ scp kconf001@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/dan/data/BAMS/RI_B_01/RI_B_01.bam.bai ./
+kconf001@turing.hpc.odu.edu's password:
+RI_B_01.bam.bai
+ 
+```
+
+* 5. launch IGV on your local machine and load in 15079_Apoc_hostsym.fasta as the "genome" and RI_B_01.bam as the input file
+
